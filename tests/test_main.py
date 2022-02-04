@@ -140,6 +140,6 @@ def test_outdated_products(mocked_time, products, expected):
     mocked_time.date.today = mock.Mock(
         return_value=datetime.date(2022, 2, 4)
     )
-    mocked_time.today()
+    mocked_time.date.today()
 
     assert outdated_products(products) == expected
