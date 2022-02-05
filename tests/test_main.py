@@ -211,4 +211,3 @@ class TestOutdatedProducts:
             }
         ]
         assert outdated_products(products) == ["duck"]
-
