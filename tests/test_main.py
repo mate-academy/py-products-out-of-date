@@ -5,25 +5,27 @@ from app.main import outdated_products
 
 class TestOutdatedProducts:
     @pytest.mark.parametrize(
-        "exp_1_date, exp_2_date, exp_3_date, exp_4_date, exp_5_date, expected_list",
+        "exp_1_date, exp_2_date, "
+        "exp_3_date, exp_4_date, "
+        "exp_5_date, expected_list",
         [
             pytest.param(
-                 datetime.date(2022, 2, 4),
-                 datetime.date(2023, 1, 3),
-                 datetime.date(2022, 1, 10),
-                 datetime.date(2022, 2, 5),
-                 datetime.date(1999, 12, 31),
-                 ["salmon", "milk", "duck"],
-                 id="first last medium products outdated"
+                datetime.date(2022, 2, 4),
+                datetime.date(2023, 1, 3),
+                datetime.date(2022, 1, 10),
+                datetime.date(2022, 2, 5),
+                datetime.date(1999, 12, 31),
+                ["salmon", "milk", "duck"],
+                id="first last medium products outdated"
             ),
             pytest.param(
-                 datetime.date(2022, 2, 5),
-                 datetime.date(2022, 3, 3),
-                 datetime.date(2023, 1, 1),
-                 datetime.date(2022, 8, 31),
-                 datetime.date(3000, 12, 31),
-                 [],
-                 id="all product fresh"
+                datetime.date(2022, 2, 5),
+                datetime.date(2022, 3, 3),
+                datetime.date(2023, 1, 1),
+                datetime.date(2022, 8, 31),
+                datetime.date(3000, 12, 31),
+                [],
+                id="all product fresh"
             )
         ]
     )
@@ -105,7 +107,8 @@ class TestOutdatedProducts:
                     }
                 ],
                 TypeError,
-                id="should raise error when 'expiration_date' is not datetime class"
+                id="should raise error when 'expiration_date' "
+                   "is not datetime class"
             ),
             pytest.param(
                 [
