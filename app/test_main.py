@@ -2,16 +2,9 @@ import pytest
 
 import datetime
 
+from unittest import mock
+
 from app.main import outdated_products
-
-
-class NewDate(datetime.date):
-    @classmethod
-    def today(cls):
-        return cls(2022, 2, 2)
-
-
-datetime.date = NewDate
 
 
 class TestMain:
@@ -36,4 +29,6 @@ class TestMain:
         product = [{"name": "salmon",
                     "expiration_date": expiration_date,
                     "price": 600}]
-        assert outdated_products(product) == func_feedback
+        with mock.patch('app.main.datetime') as mocked_time:
+            mocked_time.date.today.return_value = datetime.date(2022, 2, 2)
+            assert outdated_products(product) == func_feedback
