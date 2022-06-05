@@ -35,11 +35,6 @@ def test_all_good(products_test):
     assert outdated_products(products_test) == []
 
 
-@freeze_time("2022-02-11")
-def test_expiration_day_today_not_outdated(products_test):
-    assert outdated_products(products_test) == ['salmon']
-
-
 @freeze_time("2022-02-12")
 def test_expiration_day_yesterday_outdated(products_test):
     assert outdated_products(products_test) == ['salmon', 'chicken']
