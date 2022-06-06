@@ -6,6 +6,7 @@ from unittest import mock
 
 from app.main import outdated_products
 
+
 @pytest.mark.parametrize(
     "today_fake_date, products, outdated_product",
     [
@@ -33,6 +34,9 @@ from app.main import outdated_products
     ]
 )
 @mock.patch("app.main.datetime")
-def test_outdated_products(mocked_today, today_fake_date, products, outdated_product):
+def test_outdated_products(mocked_today,
+                           today_fake_date,
+                           products,
+                           outdated_product):
     mocked_today.date.today.return_value = today_fake_date
     assert outdated_products(products) == outdated_product
