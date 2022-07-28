@@ -5,7 +5,9 @@ import datetime
 from app.main import outdated_products
 
 
-products = [{"name": "salmon", "expiration_date": datetime.date(2022, 7, 9), "price": 600}]
+products = [{"name": "salmon",
+             "expiration_date": datetime.date(2022, 7, 9),
+             "price": 600}]
 
 
 @mock.patch("app.main.datetime")
