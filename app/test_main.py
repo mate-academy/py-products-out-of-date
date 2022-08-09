@@ -32,4 +32,4 @@ def test_date_equals_yesterday(mock_date):
             "price": 160
 
         }]
-    assert outdated_products(product) == ["duck"]
+    assert outdated_products(product) == ["duck"]  #
