@@ -28,8 +28,8 @@ def products():
 
 @pytest.fixture()
 def mocked_date():
-    with mock.patch("app.main.datetime") as today:
-        yield today
+    with mock.patch("app.main.datetime") as date:
+        yield date
 
 
 def test_of_one_expired_product(products, mocked_date):
