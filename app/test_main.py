@@ -18,7 +18,7 @@ def test_date_equals_today(mock_date):
 
 
 @mock.patch("app.main.datetime")
-def test_date_equals_yesterday(mock_date):  #
+def test_date_equals_yesterday(mock_date):
     mock_date.date.today.return_value = datetime.date(2022, 7, 6)
     product = [
         {
