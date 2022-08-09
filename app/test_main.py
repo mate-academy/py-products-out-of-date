@@ -5,7 +5,7 @@ from unittest import mock
 from app.main import outdated_products
 
 
-@mock.patch("app.main.datetime")
+@mock.patch("app.main.datetime")  #
 def test_date_equals_today(mock_date):
     mock_date.date.today.return_value = datetime.date.today()
     product = [
