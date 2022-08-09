@@ -1,4 +1,4 @@
-import datetime
+import datetime  #
 
 
 def outdated_products(products: list):
