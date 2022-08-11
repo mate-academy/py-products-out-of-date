@@ -53,4 +53,5 @@ class TestOutdatedProduct:
             result,
     ):
         mocked_datetime.date.today.return_value = date
+
         assert app.main.outdated_products(products) == result
