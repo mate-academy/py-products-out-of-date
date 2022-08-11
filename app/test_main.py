@@ -41,7 +41,7 @@ def test_outdated_products_all_items(products):
     assert outdated_products(products) == ["salmon", "chicken", "duck"]
 
 
-@freeze_time("2022-01-30")
+@freeze_time("2022-01-25")
 def test_outdated_products_no_outdated(products):
     assert outdated_products(products) == []
 
