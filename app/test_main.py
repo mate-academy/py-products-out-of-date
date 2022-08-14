@@ -9,16 +9,16 @@ def list_products():
         "name": "salmon",
         "expiration_date": datetime.date(2022, 8, 6),
         "price": 600},
-        {
+       {
         "name": "chicken",
         "expiration_date": datetime.date(2022, 8, 19),
         "price": 120
-           },
-        {
+          },
+       {
         "name": "duck",
         "expiration_date": datetime.date(2022, 9, 2),
         "price": 160
-           }
+          }
     ])
 
 
