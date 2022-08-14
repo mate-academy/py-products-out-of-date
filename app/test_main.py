@@ -20,6 +20,7 @@ def list_products():
 
 
 def test_expiration_all_dates_less_date(list_products):
+    # change date
     list_products[0]["expiration_date"] = datetime.date(2022, 7, 31)
     list_products[1]["expiration_date"] = datetime.date(2022, 7, 15)
     list_products[2]["expiration_date"] = datetime.date(2022, 6, 1)
