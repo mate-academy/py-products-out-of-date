@@ -45,11 +45,11 @@ def test_expiration_all_dates_norm_date():
     assert outdated_products(list_products) == []
 
 
-def test_expiration_dates_are_different_date():
+def test_expiration_dates_are_yesterday_date():
     list_products = [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2022, 8, 6),
+            "expiration_date": datetime.date(2022, 8, 15),
             "price": 600
         },
         {
@@ -59,7 +59,7 @@ def test_expiration_dates_are_different_date():
         },
         {
             "name": "duck",
-            "expiration_date": datetime.date(2022, 8, 2),
+            "expiration_date": datetime.date(2022, 8, 15),
             "price": 160
         }
     ]
