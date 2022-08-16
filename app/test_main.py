@@ -37,6 +37,6 @@ def test_expiration_all_dates_norm_date(list_products):
 
 def test_expiration_dates_are_different_date(list_products):
     list_products[0]["expiration_date"] = datetime.date(2022, 7, 12)
-    list_products[1]["expiration_date"] = datetime.date(2022, 8, 15)
+    list_products[1]["expiration_date"] = datetime.date(2022, 8, 19)
     list_products[2]["expiration_date"] = datetime.date(2022, 9, 30)
     assert outdated_products(list_products) == ["salmon"]
