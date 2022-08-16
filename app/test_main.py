@@ -49,7 +49,7 @@ def test_expiration_dates_are_yesterday_date():
     list_products = [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2022, 8, 15),
+            "expiration_date": datetime.date(2022, 8, 16),
             "price": 600
         },
         {
@@ -63,4 +63,4 @@ def test_expiration_dates_are_yesterday_date():
             "price": 160
         }
     ]
-    assert outdated_products(list_products) == ["salmon", "duck"]
+    assert outdated_products(list_products) == ["duck"]
