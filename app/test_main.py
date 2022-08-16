@@ -21,7 +21,7 @@ def list_products():
             "expiration_date": datetime.date(2022, 9, 2),
             "price": 160
         }
-    ]
+     ]
     )
 
 
