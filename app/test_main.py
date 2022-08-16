@@ -5,25 +5,23 @@ import pytest
 
 @pytest.fixture
 def list_products():
-    return (
-        [
-         {
+    return [
+        {
             "name": "salmon",
             "expiration_date": datetime.date(2022, 8, 6),
             "price": 600
-          },
-         {
+        },
+        {
             "name": "chicken",
             "expiration_date": datetime.date(2022, 8, 19),
             "price": 120
-          },
-         {
-             "name": "duck",
-             "expiration_date": datetime.date(2022, 9, 2),
-             "price": 160
-          }
-        ]
-    )
+        },
+        {
+            "name": "duck",
+            "expiration_date": datetime.date(2022, 9, 2),
+            "price": 160
+        }
+    ]
 
 
 def test_expiration_all_dates_less_date(list_products):
