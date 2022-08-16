@@ -29,6 +29,7 @@ def test_expiration_all_dates_less_date(list_products):
 
 
 def test_expiration_all_dates_norm_date(list_products):
+    # change date
     list_products[0]["expiration_date"] = datetime.date(2022, 8, 24)
     list_products[1]["expiration_date"] = datetime.date(2022, 8, 19)
     list_products[2]["expiration_date"] = datetime.date(2022, 8, 30)
