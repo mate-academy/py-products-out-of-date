@@ -1,23 +1,16 @@
-import pytest
-
-import datetime
-
 from unittest import mock
+import pytest
+import datetime
 
 from app.main import outdated_products
 
 
 @pytest.fixture()
-def mocked_datetime():
-    with mock.patch("datetime.date") as mocked_datetime_date:
-        mocked_datetime_date.return_value = datetime.date(2022, 9, 10)
-
-
-def test_out_fated_product(mocked_datetime):
-    el = ([
+def product_list():
+    products_list = [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2022, 9, 9),
+            "expiration_date": datetime.date(2022, 2, 10),
             "price": 600
         },
         {
@@ -30,47 +23,17 @@ def test_out_fated_product(mocked_datetime):
             "expiration_date": datetime.date(2022, 2, 1),
             "price": 160
         }
-    ])
-    assert outdated_products(el) == ['salmon', 'chicken', 'duck']
+    ]
+    yield products_list
 
 
-def test_out_fated2_product(mocked_datetime):
-    el = ([
-        {
-            "name": "salmon",
-            "expiration_date": datetime.date(2022, 9, 11),
-            "price": 600
-        },
-        {
-            "name": "chicken",
-            "expiration_date": datetime.date(2022, 2, 5),
-            "price": 120
-        },
-        {
-            "name": "duck",
-            "expiration_date": datetime.date(2022, 2, 1),
-            "price": 160
-        }
-    ])
-    assert outdated_products(el) == ['chicken', 'duck']
+@mock.patch("app.main.datetime")
+def test_outdated_products_today(mock_datetime, product_list):
+    mock_datetime.date.today.return_value = datetime.date(2022, 2, 2)
+    assert outdated_products(product_list) == ["duck"]
 
 
-def test_out_fated3_product(mocked_datetime):
-    el = ([
-        {
-            "name": "salmon",
-            "expiration_date": datetime.date(2022, 9, 10),
-            "price": 600
-        },
-        {
-            "name": "chicken",
-            "expiration_date": datetime.date(2022, 2, 5),
-            "price": 120
-        },
-        {
-            "name": "duck",
-            "expiration_date": datetime.date(2022, 2, 1),
-            "price": 160
-        }
-    ])
-    assert outdated_products(el) == ['salmon', 'chicken', 'duck']
+@mock.patch("app.main.datetime")
+def test_outdated_products_yesterday(mock_datetime, product_list):
+    mock_datetime.date.today.return_value = datetime.date(2022, 2, 1)
+    assert outdated_products(product_list) == []
