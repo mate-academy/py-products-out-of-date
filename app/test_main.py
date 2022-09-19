@@ -1,6 +1,5 @@
-from freezegun import freeze_time
 from datetime import date
-
+from unittest import mock
 import pytest
 
 from app.main import outdated_products
@@ -27,27 +26,39 @@ def products_template():
     ]
 
 
-@freeze_time("2022-02-06")
-def test_should_return_list(products_template):
+@pytest.fixture
+def mocked_datetime():
+    with mock.patch("datetime.date") as mocked_date:
+        yield mocked_date
+
+
+def test_should_return_list(products_template, mocked_datetime):
+    mocked_datetime.today.return_value = date(2022, 2, 6)
+
     result = outdated_products(products_template)
 
     assert isinstance(result, list)
 
 
-@freeze_time("2022-02-04")
-def test_should_return_one_outdated_product(products_template):
+def test_should_return_1_outdated_product(products_template, mocked_datetime):
+    mocked_datetime.today.return_value = date(2022, 2, 4)
+
     assert outdated_products(products_template) == ["duck"]
 
 
-@freeze_time("2022-02-10")
 def test_should_ignore_product_with_exp_date_same_as_today(
-        products_template
+        products_template,
+        mocked_datetime
 ):
+    mocked_datetime.today.return_value = date(2022, 2, 10)
+
     assert outdated_products(products_template) == ["chicken", "duck"]
 
 
-@freeze_time("2022-02-6")
 def test_should_return_product_with_exp_date_yesterday(
-        products_template
+        products_template,
+        mocked_datetime
 ):
+    mocked_datetime.today.return_value = date(2022, 2, 6)
+
     assert outdated_products(products_template) == ["chicken", "duck"]
