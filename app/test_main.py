@@ -23,7 +23,7 @@ from app.main import outdated_products
                  "expiration_date": datetime.date(2022, 2, 1),
                  "price": 160
             }
-         ], ["duck"], datetime.date(2022, 2, 2)),
+        ], ["duck"], datetime.date(2022, 2, 2)),
         ([
             {
                  "name": "salmon",
@@ -40,7 +40,7 @@ from app.main import outdated_products
                  "expiration_date": datetime.date(2022, 2, 1),
                  "price": 160
             }
-         ], [], datetime.date(2022, 1, 21))
+        ], [], datetime.date(2022, 1, 21))
     ]
 )
 @patch("app.main.datetime")
