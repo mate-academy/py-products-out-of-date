@@ -21,7 +21,7 @@ def product_list():
         },
         {
             "name": "duck",
-            "expiration_date": datetime.date(2022, 9, 20),
+            "expiration_date": datetime.date(2022, 9, 21),
             "price": 160
         }
     ]
@@ -30,5 +30,5 @@ def product_list():
 
 @mock.patch("app.main.datetime")
 def test_product_out_of_date(mocked_datetime_date, product_list):
-    mocked_datetime_date.date.today.return_value = datetime.date(2022, 9, 23)
-    assert outdated_products(product_list) == ["duck", "chicken"]
+    mocked_datetime_date.date.today.return_value = datetime.date(2022, 9, 22)
+    assert outdated_products(product_list) == ["duck"]
