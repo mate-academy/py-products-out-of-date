@@ -31,4 +31,4 @@ def product_list():
 @mock.patch("app.main.datetime")
 def test_product_out_of_date(mocked_datetime_date, product_list):
     mocked_datetime_date.date.today.return_value = datetime.date(2022, 9, 22)
-    assert outdated_products(product_list) == ["chicken", "duck"]
+    assert outdated_products(product_list) == ["duck"]
