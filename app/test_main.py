@@ -6,32 +6,7 @@ import pytest
 
 from app.main import outdated_products
 
-# @mock.patch("app.datetime.date")
-# @pytest.mark.parametrize(
-#     "products, expected_result",
-#     [
-#         (
-#                 [
-#                     {
-#                         "name": "salmon",
-#                         "expiration_date": date(2022, 2, 10),
-#                         "price": 600
-#                     },
-#                     {
-#                         "name": "chicken",
-#                         "expiration_date": date(2022, 2, 5),
-#                         "price": 120
-#                     },
-#                     {
-#                         "name": "duck",
-#                         "expiration_date": date(2022, 2, 1),
-#                         "price": 160
-#                     }
-#                 ],
-#                 ["duck"]
-#         )
-#     ]
-# )
+
 @pytest.fixture()
 def mocked_datetime():
     with mock.patch("datetime.date") as mocked:
