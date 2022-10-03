@@ -16,22 +16,22 @@ def mocked_datetime():
 @pytest.fixture()
 def products():
     return [
-                    {
-                        "name": "salmon",
-                        "expiration_date": date(2022, 2, 10),
-                        "price": 600
-                    },
-                    {
-                        "name": "chicken",
-                        "expiration_date": date(2022, 2, 5),
-                        "price": 120
-                    },
-                    {
-                        "name": "duck",
-                        "expiration_date": date(2022, 2, 1),
-                        "price": 160
-                    }
-                ]
+        {
+            "name": "salmon",
+            "expiration_date": date(2022, 2, 10),
+            "price": 600
+        },
+        {
+            "name": "chicken",
+            "expiration_date": date(2022, 2, 5),
+            "price": 120
+        },
+        {
+            "name": "duck",
+            "expiration_date": date(2022, 2, 1),
+            "price": 160
+        }
+    ]
 
 
 def test_outdated_products(products, mocked_datetime):
