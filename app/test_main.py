@@ -15,7 +15,7 @@ def products_template() -> list:
     products_list = [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2022, 2, 10),
+            "expiration_date": datetime.date(2022, 2, 9),
             "price": 600
         },
         {
