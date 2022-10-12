@@ -5,13 +5,13 @@ import datetime
 
 
 @pytest.fixture()
-def mocked_date():
+def mocked_date() -> mock.Mock:
     with mock.patch("app.main.datetime") as mocked_date:
         yield mocked_date.date.today
 
 
 @pytest.fixture()
-def products():
+def products() -> list:
     products = [
         {
             "name": "salmon",
@@ -32,6 +32,9 @@ def products():
     return products
 
 
-def test_return_duck_if_due_date_is_feb_2(mocked_date, products):
+def test_return_duck_if_due_date_is_feb_2(
+        mocked_date: mock.Mock,
+        products: list
+) -> None:
     mocked_date.return_value = datetime.date(2022, 2, 2)
     assert outdated_products(products) == ["duck"]
