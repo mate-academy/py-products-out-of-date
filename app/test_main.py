@@ -36,7 +36,7 @@ import datetime
 @mock.patch("app.main.datetime")
 def test_outdated_products(mocked_datetime: mock,
                            original: ParameterSet,
-                           expected: ParameterSet
+                           expected: list
                            ) -> None:
     mocked_datetime.date.today.return_value = datetime.date(2022, 2, 2)
     assert outdated_products(original) == expected
