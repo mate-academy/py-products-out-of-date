@@ -30,7 +30,7 @@ def dict_product():
             "name": "duck",
             "expiration_date": datetime.date(2022, 2, 1),
             "price": 160
-        }
+        }444
     ]
 
 
