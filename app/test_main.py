@@ -1,10 +1,12 @@
+from typing import Any
+
 import app.main
 import datetime
 
 from app.main import outdated_products
 
 
-def test_func_outdated_products(monkeypatch):
+def test_func_outdated_products(monkeypatch: Any) -> None:
     products_list = [
         {
             "name": "salmon",
@@ -26,13 +28,14 @@ def test_func_outdated_products(monkeypatch):
 
     class MyDate:
         @staticmethod
-        def today():
+        def today() -> datetime:
             return mydt(2022, 2, 2)
 
     monkeypatch.setattr(app.main.datetime, "date", MyDate)
     assert outdated_products(products_list) == ["duck"]
 
-def test_func_outdated_products_today(monkeypatch):
+
+def test_func_outdated_products_today(monkeypatch: Any) -> None:
     products_list = [
         {
             "name": "salmon",
@@ -54,7 +57,7 @@ def test_func_outdated_products_today(monkeypatch):
 
     class MyDate:
         @staticmethod
-        def today():
+        def today() -> datetime:
             return mydt(2022, 2, 2)
 
     monkeypatch.setattr(app.main.datetime, "date", MyDate)
