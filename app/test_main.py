@@ -1,6 +1,5 @@
 import datetime
 from unittest import mock, TestCase
-
 from app.main import outdated_products
 
 
