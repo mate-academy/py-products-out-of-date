@@ -32,5 +32,5 @@ def test_no_outdate_product(
         mocked_today: mock,
         products_template: list
 ) -> None:
-    mocked_today.date.today.return_value = datetime.date(2022, 2, 2)
-    assert outdated_products(products_template) == ["duck"]
+    mocked_today.date.today.return_value = datetime.date(2022, 1, 2)
+    assert outdated_products(products_template) == []
