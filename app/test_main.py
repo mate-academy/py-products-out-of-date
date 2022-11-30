@@ -1,23 +1,39 @@
+from freezegun import freeze_time
 import datetime
 from app.main import outdated_products
 
 
-def test_with_duck_out_date() -> None:
+@freeze_time("2022-2-2")
+def test_without_products_out_date() -> None:
     list_goods = [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2022, 11, 30),
+            "expiration_date": datetime.date(2022, 2, 10),
             "price": 600
-        },
-        {
-            "name": "chicken",
-            "expiration_date": datetime.date(2022, 12, 1),
-            "price": 120
-        },
-        {
-            "name": "duck",
-            "expiration_date": datetime.date(2022, 11, 29),
-            "price": 160
         }
     ]
-    assert outdated_products(list_goods) == ["duck"]
+    assert outdated_products(list_goods) == []
+
+
+@freeze_time("2022-2-2")
+def test_products_with_today_date() -> None:
+    list_goods = [
+        {
+            "name": "chicken",
+            "expiration_date": datetime.date(2022, 2, 2),
+            "price": 120
+        }
+    ]
+    assert outdated_products(list_goods) == []
+
+
+@freeze_time("2022-2-2")
+def test_products_with_yesterday_date() -> None:
+    list_goods = [
+        {
+            "name": "chicken",
+            "expiration_date": datetime.date(2022, 2, 1),
+            "price": 120
+        }
+    ]
+    assert outdated_products(list_goods) == ["chicken"]
