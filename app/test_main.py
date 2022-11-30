@@ -1,10 +1,12 @@
-from freezegun import freeze_time
+from unittest import mock
 import datetime
 from app.main import outdated_products
 
 
-@freeze_time("2022-2-2")
-def test_without_products_out_date() -> None:
+@mock.patch("datetime.date")
+def test_without_products_out_date(mock_date: str) -> None:
+    mock_date.today.return_value = 1
+    mock_date.return_value = 2
     list_goods = [
         {
             "name": "salmon",
@@ -15,8 +17,10 @@ def test_without_products_out_date() -> None:
     assert outdated_products(list_goods) == []
 
 
-@freeze_time("2022-2-2")
-def test_products_with_today_date() -> None:
+@mock.patch("datetime.date")
+def test_products_with_today_date(mock_date: str) -> None:
+    mock_date.today.return_value = 1
+    mock_date.return_value = 1
     list_goods = [
         {
             "name": "chicken",
@@ -27,8 +31,10 @@ def test_products_with_today_date() -> None:
     assert outdated_products(list_goods) == []
 
 
-@freeze_time("2022-2-2")
-def test_products_with_yesterday_date() -> None:
+@mock.patch("datetime.date")
+def test_products_with_yesterday_date(mock_date: str) -> None:
+    mock_date.today.return_value = 1
+    mock_date.return_value = 0
     list_goods = [
         {
             "name": "chicken",
