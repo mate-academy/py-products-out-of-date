@@ -14,9 +14,9 @@ def test_returns_empty() -> None:
 
 def test_returns_name_of_expired_product() -> None:
     products = [{
-        "name": "duck",
+        "name": "pork",
         "expiration_date": (datetime.date.today() - datetime.timedelta(1)),
         "price": 160
     }]
 
-    assert outdated_products(products) == ["duck"]
+    assert outdated_products(products) == ["pork"]
