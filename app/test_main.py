@@ -25,4 +25,3 @@ def test_outdated_products(mocked_datetime: mock) -> None:
     ]
     mocked_datetime.date.today.return_value = datetime.date(2022, 2, 3)
     assert outdated_products(products) == ["duck"]
-
