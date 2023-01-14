@@ -33,6 +33,10 @@ def mocked_datetime() -> mock:
         ], ["duck"])
     ]
 )
-def test_should_return_correct_answer(products: list, result: list, mocked_datetime: mock) -> None:
+def test_should_return_correct_answer(
+        products: list,
+        result: list,
+        mocked_datetime: mock
+) -> None:
     mocked_datetime.date.today.return_value = datetime.date(2022, 2, 2)
     assert outdated_products(products) == result
