@@ -7,8 +7,7 @@ def outdated_products(products: list) -> list:
 
 
 user = [{
-            "name": "salmon",
-            "expiration_date": datetime.date(2022, 2, 10),
-            "price": 600
-        }]
-print(datetime.date.today())
+    "name": "salmon",
+    "expiration_date": datetime.date(2022, 2, 10),
+    "price": 600
+}]
