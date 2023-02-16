@@ -1,6 +1,7 @@
 import pytest
 import datetime
 from unittest import mock
+
 from app.main import outdated_products
 
 today = datetime.date(2023, 2, 16)
