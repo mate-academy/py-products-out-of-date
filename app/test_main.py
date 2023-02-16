@@ -1,7 +1,9 @@
 import pytest
 import datetime
-
+from unittest import mock
 from app.main import outdated_products
+
+today = datetime.date(2023, 2, 16)
 
 
 @pytest.mark.parametrize(
@@ -28,5 +30,11 @@ from app.main import outdated_products
         }], ["salmon"]),
 
     ])
-def test_outdated_products(products: list[dict], result: list[str]) -> None:
+@mock.patch("datetime.date")
+def test_outdated_products(
+        mocked_datetime_date_today: mock,
+        products: list[dict],
+        result: list[str]
+) -> None:
+    mocked_datetime_date_today.today.return_value = today
     assert outdated_products(products) == result
