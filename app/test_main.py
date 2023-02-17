@@ -33,5 +33,5 @@ def test_outdated_products(products_template: list) -> None:
 
 def test_expiration_day_today_not_outdated(products_template: list) -> None:
     with mock.patch("datetime.date") as mock_date:
-        mock_date.today.return_value = date(2022, 1, 20)
+        mock_date.today.return_value = date(2022, 2, 1)
         assert outdated_products(products_template) == []
