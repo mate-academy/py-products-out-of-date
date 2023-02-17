@@ -8,15 +8,15 @@ from app.main import outdated_products
 
 @pytest.fixture()
 def products() -> list[dict]:
-    yield [
+    return [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2022, 2, 10),
+            "expiration_date": datetime.date(2022, 2, 3),
             "price": 600
         },
         {
             "name": "chicken",
-            "expiration_date": datetime.date(2022, 2, 5),
+            "expiration_date": datetime.date(2022, 2, 2),
             "price": 120
         },
         {
@@ -33,5 +33,4 @@ def test_correct_function(
         products: list[dict]
 ) -> None:
     mocked_date_today.date.today.return_value = datetime.date(2022, 2, 2)
-    outdated_products(products)
-    assert products == ["duck"]
+    assert outdated_products(products) == ["duck"]
