@@ -1,5 +1,5 @@
-# write your code here
 import pytest
+import datetime
 from unittest import mock
 import app.main
 
@@ -18,22 +18,24 @@ def test_outdated_products(
 ) -> None:
     with mock.patch("app.main.datetime") as mocked_datetime:
         mocked_datetime.date = mock.Mock()
-        mocked_datetime.date.today = mock.Mock(return_value=current_date)
+        mocked_datetime.date.today = mock.Mock(
+            return_value=datetime.date(*current_date)
+        )
         assert app.main.outdated_products(
             [
                 {
                     "name": "salmon",
-                    "expiration_date": (2022, 2, 10),
+                    "expiration_date": datetime.date(2022, 2, 10),
                     "price": 600
                 },
                 {
                     "name": "chicken",
-                    "expiration_date": (2022, 2, 5),
+                    "expiration_date": datetime.date(2022, 2, 5),
                     "price": 120
                 },
                 {
                     "name": "duck",
-                    "expiration_date": (2022, 2, 1),
+                    "expiration_date": datetime.date(2022, 2, 1),
                     "price": 160
                 }
             ]
