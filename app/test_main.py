@@ -36,6 +36,12 @@ def mocked_date() -> mock.Mock:
         (data, datetime.date(2023, 2, 24), ["apple"]),
         (data, datetime.date(2023, 2, 25), ["apple", "banana"]),
         (data, datetime.date(2023, 2, 26), ["apple", "banana", "orange"]),
+    ],
+    ids=[
+        "all_outdated",
+        "apple isn't outdated",
+        "apple, banana isn't outdated",
+        "all aren't outdated"
     ]
 )
 def test_outdated_products(
