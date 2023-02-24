@@ -4,7 +4,7 @@ from unittest import mock
 import pytest
 from app.main import outdated_products
 
-pr = [
+data = [
     {
         "name": "apple",
         "expiration_date": datetime.date(2023, 2, 23),
@@ -32,10 +32,10 @@ def mocked_date() -> mock.Mock:
 @pytest.mark.parametrize(
     "products,date,expected_result",
     [
-        (pr, datetime.date(2023, 2, 23), []),
-        (pr, datetime.date(2023, 2, 24), ["apple"]),
-        (pr, datetime.date(2023, 2, 25), ["apple", "banana"]),
-        (pr, datetime.date(2023, 2, 26), ["apple", "banana", "orange"]),
+        (data, datetime.date(2023, 2, 23), []),
+        (data, datetime.date(2023, 2, 24), ["apple"]),
+        (data, datetime.date(2023, 2, 25), ["apple", "banana"]),
+        (data, datetime.date(2023, 2, 26), ["apple", "banana", "orange"]),
     ]
 )
 def test_outdated_products(
