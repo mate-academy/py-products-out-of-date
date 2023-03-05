@@ -1,25 +1,24 @@
 import datetime
-
 import pytest
 
-from typing import Callable
 from unittest import mock
 
 from app.main import outdated_products
 
 
 dict_products = [
-                {
-                    "name": "chicken",
-                    "expiration_date": datetime.date(2022, 2, 5),
-                    "price": 120
-                },
-                {
-                    "name": "duck",
-                    "expiration_date": datetime.date(2022, 2, 1),
-                    "price": 160
-                }
-            ]
+    {
+        "name": "chicken",
+        "expiration_date": datetime.date(2022, 2, 5),
+        "price": 120
+    },
+    {
+        "name": "duck",
+        "expiration_date": datetime.date(2022, 2, 1),
+        "price": 160
+    }
+]
+
 
 @pytest.fixture()
 def mocked_func() -> None:
@@ -35,13 +34,12 @@ def mocked_func() -> None:
         (datetime.date(2021, 2, 3), []),
     ]
 )
-def test_outdated_products(cur_date: datetime.date, result: list):
+def test_outdated_products(cur_date: datetime.date, result: list) -> None:
     class NewDate(datetime.date):
         @classmethod
-        def today(cls):
+        def today(cls) -> None:
             return cur_date
 
     datetime.date = NewDate
 
     assert outdated_products(dict_products) == result
-
