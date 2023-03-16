@@ -1,16 +1,18 @@
 import datetime
 import pytest
 from app.main import outdated_products
-from freezegun import freeze_time
-
-
-def mocked_time() -> datetime:
-    return datetime.date.today()
+from unittest import mock
 
 
 @pytest.fixture
+def mocked_time() -> mock.Mock:
+    with mock.patch("app.main.datetime") as mocked:
+        yield mocked
+
+
+@pytest.fixture(scope="function")
 def products_template() -> list:
-    return [
+    yield [
         {
             "name": "salmon",
             "expiration_date": datetime.date(2022, 2, 10),
@@ -29,31 +31,35 @@ def products_template() -> list:
     ]
 
 
-@freeze_time("2022-02-24")
-def test_all_products_are_outdated(products_template: list) -> None:
-    mocked_time()
+def test_all_products_are_outdated(
+        products_template: list, mocked_time: mock.Mock
+) -> None:
+    mocked_time.date.today.return_value = datetime.date(2023, 2, 10)
+
     assert outdated_products(
         products_template
     ) == ["salmon", "chicken", "duck"]
 
 
-@freeze_time("2022-02-05")
 def test_product_is_not_outdated_with_expiration_date_equals_today(
-        products_template: list
+        products_template: list, mocked_time: mock.Mock
 ) -> None:
-    mocked_time()
+    mocked_time.date.today.return_value = datetime.date(2022, 2, 5)
+
     assert outdated_products(products_template) == ["duck"]
 
 
-@freeze_time("2022-02-02")
 def test_product_is_outdated_with_expiration_date_equals_yesterday(
-        products_template: list
+        products_template: list, mocked_time: mock.Mock
 ) -> None:
-    mocked_time()
+    mocked_time.date.today.return_value = datetime.date(2022, 2, 2)
+
     assert outdated_products(products_template) == ["duck"]
 
 
-@freeze_time("2021-02-24")
-def test_all_products_are_not_outdated(products_template: list) -> None:
-    mocked_time()
+def test_all_products_are_not_outdated(
+        products_template: list, mocked_time: mock.Mock
+) -> None:
+    mocked_time.date.today.return_value = datetime.date(2021, 2, 10)
+
     assert outdated_products(products_template) == []
