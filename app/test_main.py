@@ -5,7 +5,7 @@ from unittest import mock
 
 
 @pytest.fixture()
-def product_list():
+def product_list() -> list:
     return [
         {
             "name": "salmon",
@@ -28,13 +28,19 @@ def product_list():
 @pytest.mark.parametrize(
     "year,month,day,result",
     [
-        (2022, 1, 30, []),
-        (2022, 2, 3, ["duck"]),
+        (2022, 2, 1, []),
+        (2022, 2, 2, ["duck"]),
         (2022, 2, 7, ["chicken", "duck", ]),
         (2022, 2, 12, ["salmon", "chicken", "duck"])
     ]
 )
-def test_outdated_products(product_list, year, month, day, result):  # test_date,
+def test_outdated_products(
+        product_list: list,
+        year: int,
+        month: int,
+        day: int,
+        result: list
+) -> None:
     exp_date = datetime.date(year, month, day)
     with mock.patch("datetime.date") as mocked_date:
         mocked_date.today.return_value = exp_date
