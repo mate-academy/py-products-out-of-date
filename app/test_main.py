@@ -1,5 +1,5 @@
 import datetime
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch, Mock
 
 from app.main import outdated_products
 
