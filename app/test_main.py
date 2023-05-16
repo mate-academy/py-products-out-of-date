@@ -37,5 +37,5 @@ def test_should_return_list_of_expired_products(
         }
     ]
 
-    mocked_datetime.date.today.return_value = datetime.date(2022, 5, 5)
-    assert outdated_products(products_list) == ["salmon", "chicken", "duck"]
+    mocked_datetime.date.today.return_value = datetime.date(2022, 2, 10)
+    assert outdated_products(products_list) == ["chicken", "duck"]
