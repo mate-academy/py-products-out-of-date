@@ -47,7 +47,7 @@ def products_template() -> list:
     ]
 )
 @patch("datetime.date")
-def test_outdated_products(mock_datetime,
+def test_outdated_products(mock_datetime: Callable,
                            mock_datetime_today: tuple,
                            result: list,
                            products_template: list) -> None:
