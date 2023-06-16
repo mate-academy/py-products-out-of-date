@@ -16,8 +16,8 @@ def test_mock_datetime() -> Any:
 
 
 @pytest.fixture
-def test_products() -> list:
-    yield outdated_products([
+def test_fixture() -> list:
+    products = [
         {
             "name": "salmon",
             "expiration_date": datetime.date(2023, 6, 10),
@@ -30,15 +30,16 @@ def test_products() -> list:
         },
         {
             "name": "duck",
-            "expiration_date": datetime.date(2023, 7, 1),
+            "expiration_date": datetime.date(2023, 5, 1),
             "price": 160
         }
-    ])
+    ]
+    return products
 
 
 def test_outdated_products_is_duck(
-        test_products: list,
+        test_fixture: list,
         test_mock_datetime: Any
 ) -> None:
-    test_mock_datetime.date.today.return_value = datetime.date(2023, 2, 6)
-    assert outdated_products(test_products) == ["duck"]
+    test_mock_datetime.date.today.return_value = datetime.date(2023, 6, 2)
+    assert outdated_products(test_fixture) == ["duck"]
