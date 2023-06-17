@@ -1,12 +1,13 @@
 import pytest
 from unittest import mock
 from datetime import date
+from typing import Any
 
 from app.main import outdated_products
 
 
 @pytest.fixture()
-def products():
+def products() -> list:
     return [
         {
             "name": "salmon",
@@ -44,6 +45,10 @@ def products():
     ]
 )
 @mock.patch("datetime.date")
-def test_should_check_outdated_products_correctly(mocked_date, mock_today, products, expected_result) -> None:
+def test_should_check_outdated_products_correctly(
+        mocked_date: Any,
+        mock_today: Any,
+        products: list[dict],
+        expected_result: list[str]) -> None:
     mocked_date.today.return_value = mock_today
     assert outdated_products(products) == expected_result
