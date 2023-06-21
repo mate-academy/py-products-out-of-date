@@ -10,7 +10,7 @@ from app.main import outdated_products
            "price": 600}], []),
         ([{"name": "chicken", "expiration_date": datetime.date(2023, 6, 22),
            "price": 120}], []),
-        ([{"name": "apple", "expiration_date": datetime.date(2022, 6, 20),
+        ([{"name": "apple", "expiration_date": datetime.date(2023, 6, 20),
            "price": 10}], ["apple"])
     ]
 )
