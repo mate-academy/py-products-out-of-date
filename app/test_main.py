@@ -6,7 +6,7 @@ from app.main import outdated_products
 
 @mock.patch("app.main.datetime.time")
 def test_outdated_products(mocked_date: datetime) -> None:
-    mocked_date.today.return_value = datetime.date(2023, 2, 10)
+    mocked_date.date.today.return_value = datetime.date(2022, 2, 2)
 
     products = [
         {"name": "salmon",
