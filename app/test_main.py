@@ -1,4 +1,5 @@
 import datetime
+from typing import Callable
 from unittest import mock
 
 import pytest
@@ -11,84 +12,84 @@ from app.main import outdated_products
     "products,output",
     [
         (
-                [
-                    {
-                        "name": "salmon",
-                        "expiration_date": datetime.date(2022, 2, 10),
-                        "price": 600
-                    },
-                    {
-                        "name": "chicken",
-                        "expiration_date": datetime.date(2022, 2, 5),
-                        "price": 120
-                    },
-                    {
-                        "name": "duck",
-                        "expiration_date": datetime.date(2022, 2, 1),
-                        "price": 160
-                    }
-                ],
-                ["duck"]
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 2, 10),
+                    "price": 600
+                },
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 2, 5),
+                    "price": 120
+                },
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 1),
+                    "price": 160
+                }
+            ],
+            ["duck"]
         ),
         (
-                [
-                    {
-                        "name": "salmon",
-                        "expiration_date": datetime.date(2022, 1, 31),
-                        "price": 600
-                    },
-                    {
-                        "name": "chicken",
-                        "expiration_date": datetime.date(2022, 2, 5),
-                        "price": 120
-                    },
-                    {
-                        "name": "duck",
-                        "expiration_date": datetime.date(2022, 2, 1),
-                        "price": 160
-                    }
-                ],
-                ["salmon", "duck"]
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 1, 31),
+                    "price": 600
+                },
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 2, 5),
+                    "price": 120
+                },
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 1),
+                    "price": 160
+                }
+            ],
+            ["salmon", "duck"]
         ),
         (
-                [
-                    {
-                        "name": "salmon",
-                        "expiration_date": datetime.date(2022, 1, 30),
-                        "price": 600
-                    },
-                    {
-                        "name": "chicken",
-                        "expiration_date": datetime.date(2022, 1, 5),
-                        "price": 120
-                    },
-                    {
-                        "name": "duck",
-                        "expiration_date": datetime.date(2022, 2, 1),
-                        "price": 160
-                    }
-                ],
-                ["salmon", "chicken", "duck"]
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 1, 30),
+                    "price": 600
+                },
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 1, 5),
+                    "price": 120
+                },
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 1),
+                    "price": 160
+                }
+            ],
+            ["salmon", "chicken", "duck"]
         ),
         (
-                [
-                    {
-                        "name": "salmon",
-                        "expiration_date": datetime.date(2022, 2, 10),
-                        "price": 600
-                    },
-                    {
-                        "name": "chicken",
-                        "expiration_date": datetime.date(2022, 2, 5),
-                        "price": 120
-                    },
-                    {
-                        "name": "duck",
-                        "expiration_date": datetime.date(2022, 2, 3),
-                        "price": 160
-                    }
-                ],
-                []
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 2, 10),
+                    "price": 600
+                },
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 2, 5),
+                    "price": 120
+                },
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 3),
+                    "price": 160
+                }
+            ],
+            []
         )
     ],
     ids=[
@@ -98,9 +99,9 @@ from app.main import outdated_products
         "All products are fresh",
     ]
 )
-@mock.patch(f'{main.__name__}.datetime', wraps=datetime)
+@mock.patch(f"{main.__name__}.datetime", wraps=datetime)
 def test_outdated_products(
-        mocked_datetime,
+        mocked_datetime: Callable,
         products: list,
         output: list
 ) -> None:
