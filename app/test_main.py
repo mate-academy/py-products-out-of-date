@@ -102,4 +102,3 @@ def test_some_yesterday(
     mocked_today.today.assert_called_with()
 
     assert result == ["salmon"]
-
