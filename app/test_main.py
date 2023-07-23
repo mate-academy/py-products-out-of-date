@@ -30,20 +30,20 @@ def products_list_template() -> list[dict]:
     "today_date, return_list",
     [
         (
-                datetime.date(2022, 2, 1),
-                []
+            datetime.date(2022, 2, 1),
+            []
         ),
         (
-                datetime.date(2022, 2, 5),
-                ["duck"]
+            datetime.date(2022, 2, 5),
+            ["duck"]
         ),
         (
-                datetime.date(2022, 2, 10),
-                ["chicken", "duck"]
+            datetime.date(2022, 2, 10),
+            ["chicken", "duck"]
         ),
         (
-                datetime.date(2022, 2, 11),
-                ["salmon", "chicken", "duck"]
+            datetime.date(2022, 2, 11),
+            ["salmon", "chicken", "duck"]
         )
     ],
     ids=[
