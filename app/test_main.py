@@ -47,7 +47,7 @@ def products_list_template() -> list[dict]:
         )
     ],
     ids=[
-        "should return empty list when no outdated products",
+        "return empty list when no outdated products",
         "when 1 product is outdated should return list with it",
         "when 2 products are outdated should return list with them",
         "when 3 products is outdated should return list with them"
