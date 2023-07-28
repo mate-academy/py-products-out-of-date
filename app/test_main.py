@@ -16,24 +16,24 @@ def mock_today_date() -> date:
     "products, expected_outdated",
     [
         (
-                [
-                    {
-                        "name": "salmon",
-                        "expiration_date": date(2022, 2, 10),
-                        "price": 600
-                    },
-                    {
-                        "name": "chicken",
-                        "expiration_date": date(2022, 2, 5),
-                        "price": 120
-                    },
-                    {
-                        "name": "duck",
-                        "expiration_date": date(2022, 2, 1),
-                        "price": 160
-                    }
-                ],
-                ["duck"]
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": date(2022, 2, 10),
+                    "price": 600
+                },
+                {
+                    "name": "chicken",
+                    "expiration_date": date(2022, 2, 5),
+                    "price": 120
+                },
+                {
+                    "name": "duck",
+                    "expiration_date": date(2022, 2, 1),
+                    "price": 160
+                }
+            ],
+            ["duck"]
         ),
 
     ]
