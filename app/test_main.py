@@ -32,8 +32,8 @@ def info() -> List[dict]:
     [
         (datetime.date(2022, 2, 11), ["salmon", "chicken", "duck"]),
         (datetime.date(2022, 2, 8), ["chicken", "duck"]),
-        (datetime.date(2022, 2, 4), ["duck"]),
-        (datetime.date(2022, 1, 11), [])
+        (datetime.date(2022, 2, 3), ["duck"]),
+        (datetime.date(2022, 2, 1), [])
     ]
 )
 @mock.patch("datetime.date")
