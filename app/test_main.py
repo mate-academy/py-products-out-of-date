@@ -6,7 +6,7 @@ from app.main import outdated_products
 
 
 @pytest.fixture()
-def products_template():
+def products_template() -> list[dict]:
     return [
         {
             "name": "salmon",
@@ -32,6 +32,9 @@ def products_template():
 
 
 @mock.patch("app.main.datetime")
-def test_outdated_products(mocked_datetime, products_template):
+def test_outdated_products(
+        mocked_datetime: datetime,
+        products_template: list[dict]
+) -> None:
     mocked_datetime.date.today.return_value = datetime.date(2022, 2, 2)
-    assert outdated_products(products_template) == ['duck']
+    assert outdated_products(products_template) == ["duck"]
