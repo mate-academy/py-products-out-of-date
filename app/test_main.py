@@ -10,20 +10,20 @@ from app.main import outdated_products
     "date1,date2,expected_result",
     [
         pytest.param(
-            datetime.date(2023, 8, 1),
-            datetime.date(2023, 9, 1),
+            datetime.date(2023, 8, 14),
+            datetime.date(2023, 9, 15),
             ["salmon"],
             id="should return only spoiled products"
         ),
         pytest.param(
-            datetime.date(2023, 8, 1),
-            datetime.date(2023, 8, 1),
+            datetime.date(2023, 8, 14),
+            datetime.date(2023, 8, 14),
             ["salmon", "chicken"],
             id="should return all spoiled products"
         ),
         pytest.param(
-            datetime.date(2023, 9, 1),
-            datetime.date(2023, 9, 1),
+            datetime.date(2023, 8, 16),
+            datetime.date(2023, 8, 16),
             [],
             id="should return an empty lists if no spoiled products"
         )
