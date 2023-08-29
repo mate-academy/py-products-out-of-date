@@ -1,9 +1,8 @@
 import datetime
 from unittest import mock
-
 import pytest
-
 from app.main import outdated_products
+
 
 @pytest.fixture()
 def products_template() -> list:
@@ -31,14 +30,18 @@ def products_template() -> list:
     ]
 
 
-def test_outdated_products_when_date_is_today(products_template) -> None:
+def test_outdated_products_when_date_is_today(
+        products_template: list[dict]
+) -> None:
 
     with mock.patch("app.main.datetime") as mocked_today:
         mocked_today.date.today.return_value = datetime.date(2023, 8, 29)
         assert outdated_products(products_template) == ["salmon", "duck"]
 
 
-def test_outdated_products_when_date_is_yesterday(products_template) -> None:
+def test_outdated_products_when_date_is_yesterday(
+        products_template: list[dict]
+) -> None:
     with mock.patch("app.main.datetime") as mocked_today:
         mocked_today.date.today.return_value = datetime.date(2023, 8, 28)
         assert outdated_products(products_template) == ["duck"]
