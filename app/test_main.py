@@ -27,7 +27,6 @@ def test_outdated_products(
         expected_result: List[str],
 ) -> None:
     date = datetime.date(2022, 2, 2)
-
     with mock.patch("datetime.date") as mock_date:
         mock_date.today.return_value = date
         assert outdated_products(products) == expected_result
