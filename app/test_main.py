@@ -2,16 +2,17 @@ import datetime
 from unittest.mock import patch
 import pytest
 from app.main import outdated_products
+from typing import Any
 
 
 @pytest.fixture
-def mock_today():
+def mock_today() -> Any:
     with patch("app.test_main.datetime") as mock_datetime:
         mock_datetime.date.today.return_value = datetime.date(2022, 2, 2)
         yield mock_datetime.date.today
 
 
-def test_outdated_products(mock_today):
+def test_outdated_products(mock_today: Any) -> None:
     products = [
         {
             "name": "salmon",
@@ -49,7 +50,6 @@ def test_outdated_products(mock_today):
     result = outdated_products(products)
     assert result == []
 
-    # Test case 3: No products
     products = []
 
     result = outdated_products(products)
