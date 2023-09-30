@@ -3,9 +3,10 @@ from app.main import outdated_products
 from datetime import date
 from unittest.mock import patch
 
+
 class TestOutdatedProducts(unittest.TestCase):
 
-    def test_no_outdated_products(self):
+    def test_no_outdated_products(self) -> None:
         products = [
             {
                 "name": "salmon",
@@ -18,12 +19,12 @@ class TestOutdatedProducts(unittest.TestCase):
                 "price": 120
             }
         ]
-        with patch('datetime.date') as mock_date:
+        with patch("datetime.date") as mock_date:
             mock_date.today.return_value = date(2022, 2, 2)
             result = outdated_products(products)
             self.assertEqual(result, [])
 
-    def test_some_outdated_products(self):
+    def test_some_outdated_products(self) -> None:
         products = [
             {
                 "name": "salmon",
@@ -41,10 +42,11 @@ class TestOutdatedProducts(unittest.TestCase):
                 "price": 160
             }
         ]
-        with patch('datetime.date') as mock_date:
+        with patch("datetime.date") as mock_date:
             mock_date.today.return_value = date(2022, 2, 2)
             result = outdated_products(products)
-            self.assertEqual(result, ['duck'])
+            self.assertEqual(result, ["duck"])
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
