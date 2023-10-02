@@ -1,36 +1,50 @@
-import pytest
-
-from app import main
-
-
-def test_expiration_day_today_not_outdated(monkeypatch):
-    def expiration_day_today_outdated(products: list):
-        import datetime
-        return [product["name"] for product in products
-                if product["expiration_date"] <= datetime.date.today()]
-
-    monkeypatch.setattr(
-        main, "outdated_products", expiration_day_today_outdated
-    )
-
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 0, (
-        "Product with expiration date equals today is not outdated."
-    )
+import unittest
+from app.main import outdated_products
+import datetime
 
 
-def test_expiration_day_yesterday_outdated(monkeypatch):
-    def expiration_day_yesterday_not_outdated(products: list):
-        import datetime
-        return [product["name"] for product in products
-                if (product["expiration_date"] <
-                    datetime.date.today() - datetime.timedelta(days=1))]
+class TestOutdatedProducts(unittest.TestCase):
 
-    monkeypatch.setattr(
-        main, "outdated_products", expiration_day_yesterday_not_outdated
-    )
+    def test_empty_product_list(self) -> None:
+        products = []
+        result = outdated_products(products)
+        self.assertEqual(result, [])
 
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 0, (
-        "Product with expiration date equals yesterday is outdated."
-    )
+    def test_no_outdated_products(self) -> None:
+        today = datetime.date.today()
+        products = [
+            {"name": "Product1", "expiration_date":
+                today + datetime.timedelta(days=5)},
+            {"name": "Product2", "expiration_date":
+                today + datetime.timedelta(days=10)}
+        ]
+        result = outdated_products(products)
+        self.assertEqual(result, [])
+
+    def test_some_outdated_products(self) -> None:
+        today = datetime.date.today()
+        products = [
+            {"name": "Product1", "expiration_date":
+                today - datetime.timedelta(days=5)},
+            {"name": "Product2", "expiration_date":
+                today + datetime.timedelta(days=5)},
+            {"name": "Product3", "expiration_date":
+                today + datetime.timedelta(days=10)}
+        ]
+        result = outdated_products(products)
+        self.assertEqual(result, ["Product1"])
+
+    def test_all_outdated_products(self) -> None:
+        today = datetime.date.today()
+        products = [
+            {"name": "Product1", "expiration_date":
+                today - datetime.timedelta(days=5)},
+            {"name": "Product2", "expiration_date":
+                today - datetime.timedelta(days=1)}
+        ]
+        result = outdated_products(products)
+        self.assertEqual(result, ["Product1", "Product2"])
+
+
+if __name__ == "__main__":
+    unittest.main()
