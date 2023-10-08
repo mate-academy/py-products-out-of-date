@@ -7,9 +7,21 @@ from app.main import outdated_products
 @pytest.fixture()
 def products() -> list:
     yield [
-        {"name": "salmon", "expiration_date": datetime.date(2022, 2, 10), "price": 600},
-        {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5), "price": 120},
-        {"name": "duck", "expiration_date": datetime.date(2022, 2, 1), "price": 160},
+        {
+         "name": "salmon",
+         "expiration_date": datetime.date(2022, 2, 10),
+         "price": 600
+         },
+        {
+            "name": "chicken",
+            "expiration_date": datetime.date(2022, 2, 5),
+            "price": 120
+        },
+        {
+            "name": "duck",
+            "expiration_date": datetime.date(2022, 2, 1),
+            "price": 160
+        }
     ]
 
 
@@ -28,6 +40,6 @@ def test_outdated_products(
     date_today: datetime.date,
     expected_result: list,
     products: list
-):
+) -> None:
     mocked_datetime_date_today.date.today.return_value = date_today
     assert outdated_products(products) == expected_result
