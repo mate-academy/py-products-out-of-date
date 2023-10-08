@@ -8,10 +8,10 @@ from app.main import outdated_products
 def products() -> list:
     yield [
         {
-         "name": "salmon",
-         "expiration_date": datetime.date(2022, 2, 10),
-         "price": 600
-         },
+            "name": "salmon",
+            "expiration_date": datetime.date(2022, 2, 10),
+            "price": 600
+        },
         {
             "name": "chicken",
             "expiration_date": datetime.date(2022, 2, 5),
