@@ -29,6 +29,17 @@ from app.main import outdated_products
             ],
             ["duck", ],
         ),
+        (
+            datetime.date(2022, 2, 2),
+            [
+                {
+                    "name": "cheese",
+                    "expiration_date": datetime.date(2022, 2, 2),
+                    "price": 600
+                },
+            ],
+            [],
+        ),
     ]
 )
 def test_outdated_products(today: datetime.date, products: list,
