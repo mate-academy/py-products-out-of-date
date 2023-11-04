@@ -8,10 +8,10 @@ from .main import outdated_products
 @pytest.mark.parametrize(
     "today_date,expected",
     (
-            [datetime(2022, 1, 10), []],
-            [datetime(2022, 1, 11), ["duck"]],
-            [datetime(2022, 2, 5), ["chicken", "duck"]],
-            [datetime(2022, 2, 24), ["salmon", "chicken", "duck"]],
+        [datetime(2022, 1, 10), []],
+        [datetime(2022, 1, 11), ["duck"]],
+        [datetime(2022, 2, 5), ["chicken", "duck"]],
+        [datetime(2022, 2, 24), ["salmon", "chicken", "duck"]],
     )
 )
 def test_outdated_products(
