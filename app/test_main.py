@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from app.main import outdated_products
 
-from datetime import datetime, date
+from datetime import date
 
 
 @pytest.mark.parametrize(
