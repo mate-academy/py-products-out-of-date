@@ -18,7 +18,7 @@ from datetime import date
                 },
                 {
                     "name": "chicken",
-                    "expiration_date": date(2022, 2, 5),
+                    "expiration_date": date(2022, 2, 2),
                     "price": 120
                 },
                 {
