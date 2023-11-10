@@ -26,7 +26,7 @@ from unittest import mock
 )
 @mock.patch("app.main.datetime")
 def test_check_expiration_date(
-        mocked_datetime: "datetime",
+        mocked_datetime: mock,
         products_list: list[dict],
         expected_list: list[str]
 ) -> None:
