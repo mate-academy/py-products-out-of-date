@@ -26,9 +26,9 @@ from unittest import mock
 )
 @mock.patch("app.main.datetime")
 def test_check_expiration_date(
-        mocked_datetime: mock,
-        products_list: list[dict],
-        expected_list: list[str]
+        mocked_datetime: object,
+        products_list: list,
+        expected_list: list
 ) -> None:
     mocked_datetime.date.today.return_value = datetime.date(2023, 11, 10)
     assert outdated_products(products_list) == expected_list
