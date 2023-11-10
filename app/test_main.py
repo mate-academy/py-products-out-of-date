@@ -19,8 +19,13 @@ from unittest import mock
                 {
                     "name": "duck",
                     "expiration_date": datetime.date(2023, 12, 1)
-                }
-            ], ["duck"]
+                },
+                {
+                    "name": "milk",
+                    "expiration_date": datetime.date(2023, 12, 3)
+                },
+
+            ], ["salmon", "chicken"]
         )
     ]
 )
