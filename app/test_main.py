@@ -19,14 +19,22 @@ from unittest import mock
                 {
                     "name": "duck",
                     "expiration_date": datetime.date(2023, 12, 1)
+                },
+                {
+                    "name": "milk",
+                    "expiration_date": datetime.date(2024, 1, 1)
+                },
+                {
+                    "name": "meat",
+                    "expiration_date": datetime.date(2023, 11, 20)
                 }
-            ], ["duck"]
+            ], ["salmon", "chicken"]
         )
     ]
 )
 @mock.patch("app.main.datetime")
 def test_check_expiration_date(
-        mocked_datetime: object,
+        mocked_datetime: any,
         products_list: list,
         expected_list: list
 ) -> None:
