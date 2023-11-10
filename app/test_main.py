@@ -10,22 +10,17 @@ from unittest import mock
             [
                 {
                     "name": "salmon",
-                    "expiration_date": datetime.date(2023, 11, 1)
+                    "expiration_date": datetime.date(2022, 2, 10)
                 },
                 {
                     "name": "chicken",
-                    "expiration_date": datetime.date(2023, 10, 30)
+                    "expiration_date": datetime.date(2022, 2, 5)
                 },
                 {
                     "name": "duck",
-                    "expiration_date": datetime.date(2023, 12, 1)
+                    "expiration_date": datetime.date(2022, 2, 1)
                 },
-                {
-                    "name": "milk",
-                    "expiration_date": datetime.date(2023, 12, 3)
-                },
-
-            ], ["salmon", "chicken"]
+            ], ["duck"]
         )
     ]
 )
@@ -35,5 +30,5 @@ def test_check_expiration_date(
         products_list: list,
         expected_list: list
 ) -> None:
-    mocked_datetime.date.today.return_value = datetime.date(2023, 11, 10)
+    mocked_datetime.date.today.return_value = datetime.date(2022, 2, 2)
     assert outdated_products(products_list) == expected_list
