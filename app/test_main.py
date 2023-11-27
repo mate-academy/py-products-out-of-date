@@ -30,7 +30,7 @@ def test_outdated_products(
     result: list
 ) -> None:
 
-    with(
+    with (
         mock.patch("app.main.datetime")
         as mocked_datetime
     ):
