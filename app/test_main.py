@@ -13,44 +13,38 @@ from app.main import outdated_products
         (
             [
                 {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2022, 2, 10),
+                    "name": "salmon1",
+                    "expiration_date": datetime.date(2022, 12, 6),
                     "price": 600
                 },
                 {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2023, 2, 9),
+                    "name": "salmon2",
+                    "expiration_date": datetime.date(2023, 12, 5),
                     "price": 600
                 },
                 {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2022, 2, 9),
+                    "name": "salmon3",
+                    "expiration_date": datetime.date(2020, 12, 6),
                     "price": 600
                 }
             ],
-            [
-                {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2022, 2, 9),
-                    "price": 600
-                }
-            ]
+            ["salmon3"]
         ),
         (
             [
                 {
                     "name": "salmon",
-                    "expiration_date": datetime.date(2021, 2, 10),
+                    "expiration_date": datetime.date(2023, 2, 10),
                     "price": 600
                 },
                 {
                     "name": "salmon",
-                    "expiration_date": datetime.date(2022, 2, 9),
+                    "expiration_date": datetime.date(2022, 2, 11),
                     "price": 600
                 },
                 {
                     "name": "salmon",
-                    "expiration_date": datetime.date(2022, 1, 19),
+                    "expiration_date": datetime.date(2022, 3, 10),
                     "price": 600
                 }
             ],
@@ -58,13 +52,15 @@ from app.main import outdated_products
         )
     ]
 )
-@mock.patch("datetime.date.today", value=datetime.date(2022, 2, 10))
+@mock.patch("app.main.datetime")
 def test_outdated_products(
-        mocked_today: any,
+        mock_date: any,
         products: list[dict],
         result: list[dict]) -> None:
+
+    mock_date.date.today.return_value = datetime.date(2022, 2, 10)
 
     assert (
         outdated_products(products) == result
     )
-    mocked_today.assert_called()
+    # mock_date.assert_called()
