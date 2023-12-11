@@ -1,7 +1,7 @@
 import pytest
 import datetime
 from app.main import outdated_products
-from freezegun import freeze_time
+from unittest import mock
 
 
 @pytest.mark.parametrize("products, expected_result", [
@@ -46,9 +46,10 @@ from freezegun import freeze_time
         "price": 160
     }], [])
 ])
-@freeze_time("2022-02-02")
 def test_outdated_products(
         products: list,
         expected_result: list | None
 ) -> None:
-    assert outdated_products(products) == expected_result
+    with mock.patch("app.main.datetime") as mocked_datetime:
+        mocked_datetime.date.today.return_value = datetime.date(2022, 2, 2)
+        assert outdated_products(products) == expected_result
