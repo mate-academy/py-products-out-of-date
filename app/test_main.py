@@ -6,11 +6,12 @@ import datetime
 
 class TestOutdatedProducts(TestCase):
 
-    @patch("app.main.get_date")
+    @patch("app.main.datetime")
     def test_outdated_products_no_outdated_products(self,
-                                                    mock_date: MagicMock
+                                                    datetime_mock: MagicMock
                                                     ) -> None:
-        mock_date.return_value = datetime.date(2022, 2, 2)
+        datetime_mock.date.today.return_value = datetime.date(2022, 2, 2)
+
         products = [
             {"name": "salmon", "expiration_date": datetime.date(
                 2022, 2, 10), "price": 600},
@@ -19,11 +20,11 @@ class TestOutdatedProducts(TestCase):
         ]
         self.assertEqual(outdated_products(products), [])
 
-    @patch("app.main.get_date")
+    @patch("app.main.datetime")
     def test_outdated_products_some_outdated_products(self,
-                                                      mock_date: MagicMock
+                                                      datetime_mock: MagicMock
                                                       ) -> None:
-        mock_date.return_value = datetime.date(2022, 2, 2)
+        datetime_mock.date.today.return_value = datetime.date(2022, 2, 2)
         products = [
             {"name": "salmon", "expiration_date": datetime.date(
                 2022, 2, 10), "price": 600},
