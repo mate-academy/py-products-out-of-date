@@ -28,7 +28,7 @@ from app.main import outdated_products
             ],
             ["duck"],
             id="should return one expire product(duck)"
-            )
+        )
 
     ]
 )
