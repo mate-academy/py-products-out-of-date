@@ -1,6 +1,6 @@
+import datetime
 from freezegun import freeze_time
 from app.main import outdated_products
-import datetime
 
 
 @freeze_time("2022-02-02 12:00:00")
