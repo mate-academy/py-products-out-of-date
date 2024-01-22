@@ -25,9 +25,10 @@ products = [
 
 @pytest.mark.parametrize(
     "products, expected_today, expected_outdated",
-    [(products, datetime.date(2022, 2, 2), ["duck"]),
-     (products, datetime.date(2021, 2, 2), []),
-     (products, datetime.date(2024, 2, 3), ["chicken", "duck"]),
+    [(products, datetime.date(2022, 2, 6), ["chicken", "duck"]),
+     (products, datetime.date(2022, 2, 5), ["duck"]),
+     (products, datetime.date(2022, 1, 5), []),
+     (products, datetime.date(2024, 3, 6), ["salmon", "chicken", "duck"]),
      ]
 )
 def test_outdated_products(
