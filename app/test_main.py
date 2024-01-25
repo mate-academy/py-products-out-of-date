@@ -8,7 +8,7 @@ import datetime
     "now_data,list_product,value_return",
     [
         (
-            datetime.date(2022, 2, 10),
+            datetime.date(2022, 2, 5),
             [
                 {
                     "name": "salmon",
