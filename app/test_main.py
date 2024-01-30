@@ -5,7 +5,7 @@ from app.main import outdated_products
 from typing import List, Dict
 
 
-@patch('app.main.datetime')
+@patch("app.main.datetime")
 def test_outdated_products_no_expiration_date(mock_datetime: any) -> None:
     mock_datetime.date.today.return_value = datetime.date(2022, 2, 2)
 
@@ -27,4 +27,4 @@ def test_outdated_products_no_expiration_date(mock_datetime: any) -> None:
     ]
 
     result: List[str] = outdated_products(products)
-    assert result == ['duck']
+    assert result == ["duck"]
