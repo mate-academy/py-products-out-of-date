@@ -27,19 +27,19 @@ products = [
     "expected_date,expected_names",
     [
         (
-            datetime.date(2024, 2, 6),
+            datetime.date(2022, 2, 6),
             ["chicken", "duck"],
         ),
         (
-            datetime.date(2024, 2, 5),
+            datetime.date(2022, 2, 5),
             ["duck"],
         ),
         (
-            datetime.date(2024, 2, 11),
+            datetime.date(2022, 2, 11),
             ["salmon", "chicken", "duck"],
         ),
         (
-            datetime.date(2024, 1, 31),
+            datetime.date(2022, 1, 31),
             [],
         ),
 
