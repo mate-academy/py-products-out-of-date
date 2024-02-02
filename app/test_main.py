@@ -36,8 +36,8 @@ def test_outdated_products(
     today_date: datetime.date,
     expected_names: list[str],
 ) -> None:
-    with patch("datetime.datetime.date.today") as mock_date:
-        mock_date.return_value = today_date
+    with patch("datetime.date") as mock_date:
+        mock_date.today.return_value = today_date
 
         products = [
             {
