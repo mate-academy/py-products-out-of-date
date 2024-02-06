@@ -27,17 +27,17 @@ from app.main import outdated_products
                     "price": 160
                 }
             ],
-            datetime.date(2022, 2, 2),
+            datetime.date.today(),
             ["duck"]
         )
     ]
 )
-@mock.patch("app.main.datetime.date.today")
+@mock.patch("app.main.datetime.date")
 def test_outdated_products(
         mock_datime_date_today: mock.MagicMock,
         products: list,
         today_date: datetime,
         names_product: list
 ) -> None:
-    mock_datime_date_today.return_value = today_date
+    mock_datime_date_today.today.return_value = today_date
     assert outdated_products(products) == names_product
