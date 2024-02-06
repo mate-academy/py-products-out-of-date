@@ -13,12 +13,12 @@ from app.main import outdated_products
             [
                 {
                     "name": "salmon",
-                    "expiration_date": datetime.date(2024, 2, 10),
+                    "expiration_date": datetime.date(2024, 2, 6),
                     "price": 600
                 },
                 {
                     "name": "chicken",
-                    "expiration_date": datetime.date(2024, 2, 6),
+                    "expiration_date": datetime.date(2024, 2, 5),
                     "price": 120
                 },
                 {
@@ -28,7 +28,7 @@ from app.main import outdated_products
                 }
             ],
             datetime.date.today(),
-            ["duck"]
+            ["chicken", "duck"]
         )
     ]
 )
