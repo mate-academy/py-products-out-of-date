@@ -10,7 +10,7 @@ def products_template() -> list:
     return [
         {
             "name": "salmon",
-            "expiration_date": datetime.date(2024, 2, 10),
+            "expiration_date": datetime.date(2023, 2, 10),
             "price": 600
         },
         {
@@ -31,5 +31,5 @@ def test_should_return_correct_list(
         mocked_datetime: mock,
         products_template: list[dict]
 ) -> None:
-    mocked_datetime.date.today.return_value = datetime.date(2024, 1, 25)
+    mocked_datetime.date.today.return_value = datetime.date(2023, 1, 25)
     assert outdated_products(products_template) == ["chicken", "duck"]
