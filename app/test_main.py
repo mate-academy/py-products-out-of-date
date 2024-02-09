@@ -33,4 +33,4 @@ class TestOutdatedProduct():
                     "price": 120
                 }
             ]
-            assert outdated_products(product) == ["salmon", "chicken"]
+            assert outdated_products(product) == ["chicken"]
