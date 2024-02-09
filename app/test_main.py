@@ -1,34 +1,42 @@
 import datetime
 from unittest import mock
+import pytest
 
 from app.main import outdated_products
 
 
 class TestOutdatedProduct():
-
-    def test_expiration_day_yesterday_outdated(self) -> None:
-        with mock.patch("app.main.datetime") as mock_date:
-            mock_date.date.today.return_value = datetime.date(2024, 2, 10)
-            product = [
+    @pytest.mark.parametrize(
+        "product,result,today",
+        [
+            pytest.param([
                 {
                     "name": "salmon",
-                    "expiration_date": datetime.date(2024, 2, 10),
+                    "expiration_date": datetime.date(2022, 2, 10),
                     "price": 600
                 },
                 {
                     "name": "chicken",
-                    "expiration_date": datetime.date(2024, 2, 9),
+                    "expiration_date": datetime.date(2022, 2, 7),
                     "price": 120
                 },
-            ]
-            assert outdated_products(product) == ["chicken"]
-
-    def test_expiration_day_today_not_outdated(self) -> None:
-        product = [
-            {
-                "name": "salmon",
-                "expiration_date": datetime.date.today(),
-                "price": 600
-            }
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 8),
+                    "price": 50
+                }
+            ],
+                ["chicken"],
+                datetime.date(2022, 2, 8)
+            )
         ]
-        assert outdated_products(product) == []
+    )
+    def test_expiration_day_yesterday_outdated(
+            self,
+            product: list,
+            result: list,
+            today: datetime.datetime
+    ) -> None:
+        with mock.patch("app.main.datetime") as mock_date:
+            mock_date.date.today.return_value = today
+            assert outdated_products(product) == result
