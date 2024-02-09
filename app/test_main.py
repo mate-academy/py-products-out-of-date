@@ -26,7 +26,7 @@ class TestOutdatedProduct():
                     "price": 50
                 }
             ],
-                ["chicken"],
+                ["chicken", "duck"],
                 datetime.date(2022, 2, 8)
             )
         ]
