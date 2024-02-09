@@ -23,7 +23,7 @@ class TestOutdatedProduct():
             ]
             assert outdated_products(product) == ["chicken"]
 
-    def test_expiration_day_today_not_outdated(self):
+    def test_expiration_day_today_not_outdated(self) -> None:
         product = [
             {
                 "name": "salmon",
