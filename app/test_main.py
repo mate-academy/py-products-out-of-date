@@ -6,19 +6,7 @@ from app.main import outdated_products
 
 class TestOutdatedProduct():
 
-    def test_outdated_products_yesterday(self) -> None:
-        with mock.patch("app.main.datetime") as mock_date:
-            mock_date.date.today.return_value = datetime.date(2024, 2, 10)
-            product = [
-                {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2024, 2, 9),
-                    "price": 600
-                }
-            ]
-            assert outdated_products(product) == ["salmon"]
-
-    def test_outdated_products_today(self) -> None:
+    def test_expiration_day_yesterday_outdated(self) -> None:
         with mock.patch("app.main.datetime") as mock_date:
             mock_date.date.today.return_value = datetime.date(2024, 2, 10)
             product = [
@@ -29,8 +17,18 @@ class TestOutdatedProduct():
                 },
                 {
                     "name": "chicken",
-                    "expiration_date": datetime.date(2024, 2, 5),
+                    "expiration_date": datetime.date(2024, 2, 9),
                     "price": 120
-                }
+                },
             ]
             assert outdated_products(product) == ["chicken"]
+
+    def test_expiration_day_today_not_outdated(self):
+        product = [
+            {
+                "name": "salmon",
+                "expiration_date": datetime.date.today(),
+                "price": 600
+            }
+        ]
+        assert outdated_products(product) == []
