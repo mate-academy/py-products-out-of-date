@@ -1,11 +1,14 @@
 import datetime
+from unittest import mock
+from unittest.mock import MagicMock
+
 import pytest
 
 from app.main import outdated_products
 
 
 @pytest.mark.parametrize(
-    "products, expected_result",
+    "products, current_date, expected_result",
     [
         pytest.param(
             [
@@ -25,6 +28,7 @@ from app.main import outdated_products
                     "price": 160
                 }
             ],
+            datetime.date(2024, 2, 18),
             ["duck"],
             id="should return list with outdated products names"
         ),
@@ -41,12 +45,21 @@ from app.main import outdated_products
                     "price": 120
                 },
             ],
+            datetime.date(2024, 2, 18),
             [],
             id="should return empty list if no outdated products"
         )
     ]
 )
-def test_outdated_products(products: list, expected_result: list) -> None:
+@mock.patch("app.main.datetime.date")
+def test_outdated_products(
+        mocked_date_today: MagicMock,
+        products: list,
+        current_date: datetime,
+        expected_result: list
+) -> None:
+    mocked_date_today.today.return_value = current_date
+
     result = outdated_products(products)
 
     assert result == expected_result
