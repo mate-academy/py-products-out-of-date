@@ -4,7 +4,7 @@ import pytest
 from app.main import outdated_products
 
 
-@mock.patch("datetime.date.today")
+@mock.patch("app.main.datetime")
 @pytest.fixture()
 def product_list() -> list:
     return [
