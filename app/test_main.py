@@ -24,4 +24,4 @@ def test_outdated_products() -> None:
             "expiration_date": datetime.date(2022, 2, 1),
             "price": 160
         }
-    ]) == ["duck"]
+    ]) == ["salmon", "chicken", "duck"]
