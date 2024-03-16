@@ -1,1 +1,21 @@
-# write your code here
+import unittest
+from unittest.mock import patch
+import datetime
+from app.main import outdated_products
+
+
+class TestOutdatedProducts(unittest.TestCase):
+    @patch("app.main.datetime")
+    def test_outdated_products(self, mock_datetime: callable) -> None:
+        mock_datetime.date.today.return_value = datetime.date(2022, 2, 2)
+        mock_datetime.date.side_effect = datetime.date
+
+        products = [
+            {"name": "Milk", "expiration_date": datetime.date(2022, 1, 20)},
+            {"name": "Bread", "expiration_date": datetime.date(2022, 2, 3)},
+            {"name": "Cheese", "expiration_date": datetime.date(2022, 2, 1)}
+        ]
+
+        result = outdated_products(products)
+        self.assertIn("Cheese", result)
+        self.assertNotIn("Bread", result)
