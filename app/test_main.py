@@ -1,5 +1,5 @@
 import datetime
-from unittest.mock import MagicMock
+from unittest.mock import patch
 import pytest
 from app.main import outdated_products
 
@@ -24,9 +24,8 @@ from app.main import outdated_products
     ]
 )
 def test_outdated_products(products: list, expected_result: list) -> None:
-    datetime_date_mock = MagicMock()
-    datetime_date_mock.today = MagicMock(
-        return_value=datetime.date(2024, 2, 3))
-    datetime.date = datetime_date_mock
-    result = outdated_products(products)
+    current_date = datetime.date(2024, 2, 3)
+    with patch("app.main.datetime") as mock_date:
+        mock_date.date.today.return_value = current_date
+        result = outdated_products(products)
     assert result == expected_result
