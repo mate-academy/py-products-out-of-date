@@ -34,13 +34,13 @@ from app.main import outdated_products
         "price": 40
     }, {
         "name": "cheese",
-        "expiration_date": (2022, 1, 20),
+        "expiration_date": (2022, 2, 2),
         "price": 90
     }, {
         "name": "cream",
         "expiration_date": (2022, 1, 30),
         "price": 50
-    }], (2022, 2, 2), ["yogurt", "cheese", "cream"]
+    }], (2022, 2, 2), ["yogurt", "cream"]
     )])
 @mock.patch("app.main.datetime.date")
 def test_outdated_products(
