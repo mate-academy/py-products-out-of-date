@@ -110,5 +110,4 @@ def test_outdated_products(products: list[dict],
                            fake_date: str,
                            expected: list[str]) -> None:
     with freeze_time(fake_date):
-        assert (outdated_products(products)
-                == expected)
+        assert (outdated_products(products) == expected)
