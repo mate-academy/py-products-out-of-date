@@ -4,7 +4,7 @@ from app.main import outdated_products
 
 
 @mock.patch("datetime.date")
-def test_outdated_products_before_today(mock_time_today):
+def test_outdated_products_before_today(mock_time_today: any) -> None:
     mock_time_today.today.return_value = datetime.datetime(2020, 1, 1)
     products = [
         {
@@ -28,7 +28,7 @@ def test_outdated_products_before_today(mock_time_today):
 
 
 @mock.patch("datetime.date")
-def test_outdated_products_after_today(mock_time_today):
+def test_outdated_products_after_today(mock_time_today: any) -> None:
     mock_time_today.today.return_value = datetime.datetime(2020, 12, 12)
     products = [
         {
@@ -52,7 +52,7 @@ def test_outdated_products_after_today(mock_time_today):
 
 
 @mock.patch("datetime.date")
-def test_outdated_products_today(mock_time_today):
+def test_outdated_products_today(mock_time_today: any) -> None:
     mock_time_today.today.return_value = datetime.datetime(2020, 10, 10)
     products = [
         {
@@ -76,7 +76,7 @@ def test_outdated_products_today(mock_time_today):
 
 
 @mock.patch("datetime.date")
-def test_outdated_yesterday(mock_time_today):
+def test_outdated_yesterday(mock_time_today: any) -> None:
     mock_time_today.today.return_value = datetime.datetime(2020, 5, 5)
     products = [
         {
