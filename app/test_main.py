@@ -4,6 +4,7 @@ import pytest
 
 from app.main import outdated_products
 
+
 @pytest.mark.parametrize(
     "input_data, result",
     [
@@ -29,7 +30,6 @@ from app.main import outdated_products
         )
     ]
 )
-
 @patch("app.main.get_today", return_value=datetime.date(2022, 2, 10))
 def test_main_func(
         mock_get_today: MagicMock, input_data: list[dict], result: list[str]

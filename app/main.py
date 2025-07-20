@@ -1,5 +1,6 @@
 import datetime
 
+
 def get_today() -> datetime:
     return datetime.date.today()
 
