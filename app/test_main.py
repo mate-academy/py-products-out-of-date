@@ -13,12 +13,12 @@ test_days = curr_day, yesterday, test_day,
 inp_data = [
     {
         "name": "salmon",
-        "expiration_date": date(2022, 2, 10),
+        "expiration_date": curr_day,
         "price": 600
     },
     {
         "name": "chicken",
-        "expiration_date": date(2022, 2, 5),
+        "expiration_date": yesterday,
         "price": 120
     },
     {
@@ -30,8 +30,8 @@ inp_data = [
 
 outp_res = (
     ["duck"],
-    ["salmon", "chicken", "duck"],
-    ["salmon", "chicken", "duck"]
+    ["chicken", "duck"],
+    ["duck"]
 )
 
 
@@ -39,11 +39,11 @@ outp_res = (
     ("inp_data,mock_day,outp_res"),
     [
         param(inp_data, test_days[2], outp_res[0], id="std_testcase"),
-        param(inp_data, test_days[0], outp_res[0], id="today"),
-        param(inp_data, test_days[1], outp_res[0], id="yesterday"),
+        param(inp_data, test_days[0], outp_res[1], id="today"),
+        param(inp_data, test_days[1], outp_res[2], id="yesterday"),
     ]
 )
-@mock.patch("datetime.date")
+@mock.patch("app.main.datetime.date")
 def test_outdated_products(
         mock_today: object,
         mock_day: object,
