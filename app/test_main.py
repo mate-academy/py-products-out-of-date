@@ -26,6 +26,8 @@ def test_should_return_outdated_products(
         products_template: list
 ) -> None:
     mocked_date.date.today.return_value = datetime.date(2025, 2, 5)
+    mocked_date.date.side_effect = \
+        lambda *args, **kwargs: datetime.date(*args, **kwargs)
     assert outdated_products(products_template) == ["chicken"]
 
 
@@ -35,6 +37,8 @@ def test_should_return_empty_list_if_all_products_are_good(
         products_template: list
 ) -> None:
     mocked_date.date.today.return_value = datetime.date(2021, 2, 5)
+    mocked_date.date.side_effect = \
+        lambda *args, **kwargs: datetime.date(*args, **kwargs)
     assert outdated_products(products_template) == []
 
 
@@ -44,6 +48,8 @@ def test_should_return_empty_list_if_all_products_expiration_date_are_today(
         products_template: list
 ) -> None:
     mocked_date.date.today.return_value = datetime.date(2022, 2, 5)
+    mocked_date.date.side_effect = \
+        lambda *args, **kwargs: datetime.date(*args, **kwargs)
     assert outdated_products(products_template) == []
 
 
@@ -53,4 +59,6 @@ def test_outdated_if_expiration_date_equal_yesterday(
         products_template: list
 ) -> None:
     mocked_date.date.today.return_value = datetime.date(2022, 2, 6)
+    mocked_date.date.side_effect = \
+        lambda *args, **kwargs: datetime.date(*args, **kwargs)
     assert outdated_products(products_template) == []
