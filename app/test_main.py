@@ -61,4 +61,4 @@ def test_outdated_if_expiration_date_equal_yesterday(
     mocked_date.date.today.return_value = datetime.date(2022, 2, 6)
     mocked_date.date.side_effect = \
         lambda *args, **kwargs: datetime.date(*args, **kwargs)
-    assert outdated_products(products_template) == []
+    assert outdated_products(products_template) == ["chicken"]
