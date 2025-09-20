@@ -4,7 +4,7 @@ from app.main import outdated_products
 
 
 @mock.patch("app.main.date")
-def test_outdated_products():
+def test_outdated_products() -> None:
     date.today.return_value = date(2022, 2, 2)
     result = outdated_products([
         {
@@ -24,5 +24,3 @@ def test_outdated_products():
         }
     ])
     assert result == ["duck"]
-
-
