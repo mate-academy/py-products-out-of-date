@@ -55,3 +55,17 @@ def test_two_outdated_product(
         product_list: list
 ) -> None:
     assert outdated_products(product_list) == ["chicken", "duck"]
+
+
+@freeze_time("2022-02-01")
+def test_today_not_outdated(
+        product_list: list
+) -> None:
+    assert outdated_products(product_list) == []
+
+
+@freeze_time("2022-02-02")
+def test_yesterday_outdated(
+        product_list: list
+) -> None:
+    assert outdated_products(product_list) == ["duck"]
