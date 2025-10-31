@@ -67,3 +67,17 @@ def test_outdated_products_exp_date_is_equal_to_today_date() -> None:
     assert (
         outdated_products(products) == []
     )
+
+
+@mock.patch("app.main.datetime.date", new=FakeDate)
+def test_outdated_products_exp_date_is_yesterday() -> None:
+    products = [
+        {
+            "name": "salmon",
+            "expiration_date": datetime.date(2025, 10, 27),
+            "price": 600
+        },
+    ]
+    assert (
+        outdated_products(products) == ["salmon"]
+    )
