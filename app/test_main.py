@@ -38,3 +38,18 @@ def test_outdated(monkeypatch: MonkeyPatch) -> None:
         _make_prod("ham", 2025, 10, 31),
     ]
     assert main.outdated_products(products) == ["milk", "ham"]
+
+
+def test_expiration_today_not_outdated(monkeypatch: MonkeyPatch) -> None:
+    class FakeDate(datetime.date):
+        @classmethod
+        def today(cls) -> datetime.date:
+            return cls(2025, 11, 4)
+
+    monkeypatch.setattr(main.datetime, "date", FakeDate)
+
+    products = [
+        _make_prod("yogurt", 2025, 11, 4),
+        _make_prod("bread", 2025, 11, 3),
+    ]
+    assert main.outdated_products(products) == ["bread"]
