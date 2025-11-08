@@ -6,11 +6,14 @@ class Date(_stdlib_datetime.date):
     def today(cls):
         return _stdlib_datetime.date.today()
 
+
 class _DatetimeModule:
     date = Date
 
+
 # Expondo 'datetime' para testes (mockers)
 datetime = _DatetimeModule()
+
 
 def outdated_products(products: list) -> list:
     return [
