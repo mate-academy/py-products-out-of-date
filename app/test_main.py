@@ -1,8 +1,10 @@
 import datetime
+from typing import Any
+
 from app.main import outdated_products
 
 
-def test_outdated_products_with_some_expired(mocker):
+def test_outdated_products_with_some_expired(mocker: Any) -> None:
     mocked_today = datetime.date(2023, 10, 27)
     mocker.patch("app.main.datetime.date.today", return_value=mocked_today)
 
@@ -15,7 +17,7 @@ def test_outdated_products_with_some_expired(mocker):
     assert outdated_products(products) == ["bread"]
 
 
-def test_outdated_products_with_none_expired(mocker):
+def test_outdated_products_with_none_expired(mocker: Any) -> None:
     mocked_today = datetime.date(2023, 10, 27)
     mocker.patch("app.main.datetime.date.today", return_value=mocked_today)
 
@@ -27,7 +29,7 @@ def test_outdated_products_with_none_expired(mocker):
     assert outdated_products(products) == []
 
 
-def test_outdated_products_with_all_expired(mocker):
+def test_outdated_products_with_all_expired(mocker: Any) -> None:
     mocked_today = datetime.date(2023, 10, 27)
     mocker.patch("app.main.datetime.date.today", return_value=mocked_today)
 
@@ -39,11 +41,11 @@ def test_outdated_products_with_all_expired(mocker):
     assert outdated_products(products) == ["bread", "yogurt"]
 
 
-def test_outdated_products_with_empty_list():
+def test_outdated_products_with_empty_list() -> None:
     assert outdated_products([]) == []
 
 
-def test_outdated_products_with_one_expiring_today(mocker):
+def test_outdated_products_with_one_expiring_today(mocker: Any) -> None:
     mocked_today = datetime.date(2023, 10, 27)
     mocker.patch("app.main.datetime.date.today", return_value=mocked_today)
 
@@ -54,12 +56,12 @@ def test_outdated_products_with_one_expiring_today(mocker):
     assert outdated_products(products) == []
 
 
-def test_outdated_products_from_readme_example(mocker):
+def test_outdated_products_from_readme_example(mocker: Any) -> None:
     mocked_today = datetime.date(2022, 2, 2)
     mocker.patch("app.main.datetime.date.today", return_value=mocked_today)
     products = [
         {"name": "salmon", "expiration_date": datetime.date(2022, 2, 10)},
-        {"name": "chicken", "expirationATE": datetime.date(2022, 2, 5)},
+        {"name": "chicken", "expiration_date": datetime.date(2022, 2, 5)},
         {"name": "duck", "expiration_date": datetime.date(2022, 2, 1)},
     ]
     assert outdated_products(products) == ["duck"]
