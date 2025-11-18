@@ -12,11 +12,9 @@ products = [
 
 @pytest.fixture
 def freeze_date():
-    # Зберігаємо ОРИГІНАЛЬНИЙ datetime.date
     real_date = datetime.date
 
     with mock.patch("app.main.datetime.date") as mocked_date:
-        # конструктор має створювати реальні дати
         mocked_date.side_effect = lambda *a, **kw: real_date(*a, **kw)
 
         def _set(d):
