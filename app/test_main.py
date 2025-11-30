@@ -8,7 +8,7 @@ import app.main
 @pytest.mark.parametrize(
     "date, current_inventory, result",
     [
-        (datetime.date.today(), [
+        (datetime.date(2025,11,29), [
             {
                 "name": "salmon",
                 "expiration_date": datetime.date(2025, 11, 30),
