@@ -17,7 +17,7 @@ def list_products() -> list:
          "expiration_date": datetime.date(2025, 11, 26),
          "price": 104},
         {"name": "chicken",
-         "expiration_date": datetime.date(2025, 12, 4),
+         "expiration_date": datetime.date(2025, 12, 2),
          "price": 456},
         {"name": "duck",
          "expiration_date": datetime.date(2025, 12, 3),
