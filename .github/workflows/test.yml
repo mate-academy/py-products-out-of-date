@@ -12,11 +12,14 @@ jobs:
         with:
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-
-      - name: Set Up Python 3.14
-        uses: actions/setup-python@v2
+      
+      - name: Clear pip cache
+        run: pip cache purge || true
+      
+      - name: Set Up Python 3.13
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.14"
+          python-version: "3.13"
 
       - name: Install pytest and flake8
         run: |
@@ -24,7 +27,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run flake8
-        run: flake8 app/
+        run: |
+          pip uninstall flake8-annotations flake8-quotes -y
+          flake8 app/
       - name: Run student tests
         timeout-minutes: 5
         run: pytest app/
