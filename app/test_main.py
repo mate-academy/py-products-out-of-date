@@ -4,14 +4,7 @@ from unittest.mock import patch
 from app.main import outdated_products
 
 
-def _mock_today(fake_today: datetime.date):
-    with patch("app.main.datetime.date") as mock_date:
-        mock_date.today.return_value = fake_today
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
-        yield
-
-
-def test_one_outdated_product():
+def test_one_outdated_product() -> None:
     fake_today = datetime.date(2022, 2, 2)
 
     products = [
@@ -29,12 +22,16 @@ def test_one_outdated_product():
 
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = fake_today
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        mock_date.side_effect = (
+            lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        )
 
-        assert outdated_products(products) == ["duck"]
+        result = outdated_products(products)
+
+    assert result == ["duck"]
 
 
-def test_expiration_date_equal_today_not_outdated():
+def test_expiration_date_equal_today_not_outdated() -> None:
     fake_today = datetime.date(2022, 2, 2)
 
     products = [
@@ -47,12 +44,16 @@ def test_expiration_date_equal_today_not_outdated():
 
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = fake_today
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        mock_date.side_effect = (
+            lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        )
 
-        assert outdated_products(products) == []
+        result = outdated_products(products)
+
+    assert result == []
 
 
-def test_all_products_outdated():
+def test_all_products_outdated() -> None:
     fake_today = datetime.date(2022, 2, 10)
 
     products = [
@@ -70,12 +71,16 @@ def test_all_products_outdated():
 
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = fake_today
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        mock_date.side_effect = (
+            lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        )
 
-        assert outdated_products(products) == ["milk", "bread"]
+        result = outdated_products(products)
+
+    assert result == ["milk", "bread"]
 
 
-def test_no_outdated_products():
+def test_no_outdated_products() -> None:
     fake_today = datetime.date(2022, 2, 1)
 
     products = [
@@ -93,7 +98,10 @@ def test_no_outdated_products():
 
     with patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = fake_today
-        mock_date.side_effect = lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        mock_date.side_effect = (
+            lambda *args, **kwargs: datetime.date(*args, **kwargs)
+        )
 
-        assert outdated_products(products) == []
+        result = outdated_products(products)
 
+    assert result == []
