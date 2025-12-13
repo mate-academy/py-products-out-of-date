@@ -15,7 +15,7 @@ from app.main import outdated_products
                     "price": 600,
                 }
             ],
-            datetime.date(2026, 1, 1),  # mock_current_date (завтра)
+            datetime.date(2026, 1, 1),
             ["salmon"],
         ),
 
@@ -27,7 +27,7 @@ from app.main import outdated_products
                     "price": 120,
                 }
             ],
-            datetime.date(2025, 2, 1),  # mock_current_date (сегодня, до срока)
+            datetime.date(2025, 2, 1),
             [],
         ),
 
@@ -54,7 +54,6 @@ from app.main import outdated_products
             datetime.date(2025, 10, 20),
             [],
         ),
-
     ],
 )
 @patch("app.main.datetime.date")
