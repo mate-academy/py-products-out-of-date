@@ -1,4 +1,4 @@
-from unittest.mock import patch, Mock # Добавлено Mock для аннотации типа
+from unittest.mock import patch, Mock
 import pytest
 import datetime
 from app.main import outdated_products
