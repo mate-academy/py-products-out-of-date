@@ -34,3 +34,11 @@ def test_time(monkeypatch: MonkeyPatch) -> None:
     result = outdated_products(products)
 
     assert set(result) == set(expected)
+
+
+def test_less(monkeypatch: MonkeyPatch) -> None:
+    monkeypatch.setattr(main.datetime, "date", datetime.date)
+
+    products = []
+    result = outdated_products(products)
+    assert result == []
