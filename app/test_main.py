@@ -42,3 +42,22 @@ def test_less(monkeypatch: MonkeyPatch) -> None:
     products = []
     result = outdated_products(products)
     assert result == []
+
+
+def test_yesterday_is_outdated(monkeypatch) -> None:
+    class FakeDate(datetime.date):
+        @classmethod
+        def today(cls) -> "FakeDate":
+            return cls(2022, 2, 2)
+
+    monkeypatch.setattr(main.datetime, "date", FakeDate)
+
+    products = [
+        {
+            "name": "yesterday",
+            "expiration_date": FakeDate(2022, 2, 1),
+            "price": 100,
+        },
+    ]
+
+    assert main.outdated_products(products) == ["yesterday"]
