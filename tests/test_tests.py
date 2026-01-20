@@ -1,6 +1,10 @@
 import pytest
 
 from app import main
+from pathlib import Path
+
+TEST_MAIN = Path(__file__).parent.parent / "app" / "test_main.py"
+
 
 
 def test_expiration_day_today_not_outdated(monkeypatch):
@@ -13,7 +17,8 @@ def test_expiration_day_today_not_outdated(monkeypatch):
         main, "outdated_products", expiration_day_today_outdated
     )
 
-    test_result = pytest.main(["app/test_main.py"])
+    test_result = pytest.main([str(TEST_MAIN)])
+
     assert test_result.value == 1, (
         "Product with expiration date equals today is not outdated."
     )
@@ -30,7 +35,8 @@ def test_expiration_day_yesterday_outdated(monkeypatch):
         main, "outdated_products", expiration_day_yesterday_not_outdated
     )
 
-    test_result = pytest.main(["app/test_main.py"])
+    test_result = pytest.main([str(TEST_MAIN)])
+
     assert test_result.value == 1, (
         "Product with expiration date equals yesterday is outdated."
     )
