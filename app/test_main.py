@@ -1,10 +1,9 @@
 from app.main import outdated_products
 import app.main as main
 import datetime
-from _pytest.monkeypatch import MonkeyPatch
 
 
-def test_time(monkeypatch: MonkeyPatch) -> None:
+def test_time(monkeypatch) -> None:
     class FakeDate(datetime.date):
         @classmethod
         def today(cls) -> "FakeDate":
@@ -36,7 +35,7 @@ def test_time(monkeypatch: MonkeyPatch) -> None:
     assert set(result) == set(expected)
 
 
-def test_less(monkeypatch: MonkeyPatch) -> None:
+def test_less(monkeypatch) -> None:
     monkeypatch.setattr(main.datetime, "date", datetime.date)
 
     products = []
