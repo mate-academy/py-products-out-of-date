@@ -24,8 +24,11 @@ from typing import Any
         )
     ]
 )
-@mock.patch("app.main.datetime.date")
-def test_outdated_products(mock_date: Any, products: Any, expected: Any)\
-        -> None:
-    mock_date.today.return_value = datetime.date(2022, 2, 2)
+
+
+@mock.patch("app.main.datetime.date.today")
+def test_outdated_products(
+        mock_today: Any, products: list[dict], expected: list[str]
+) -> None:
+    mock_today.return_value = datetime.date(2022, 2, 2)
     assert outdated_products(products) == expected
