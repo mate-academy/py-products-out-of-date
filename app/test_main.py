@@ -10,25 +10,31 @@ from typing import Any
     [
         (
             [
-                {"name": "salmon",
-                 "expiration_date": datetime.date(2022, 2, 10),
-                 "price": 600},
-                {"name": "chicken",
-                 "expiration_date": datetime.date(2022, 2, 5),
-                 "price": 120},
-                {"name": "duck",
-                 "expiration_date": datetime.date(2022, 2, 1),
-                 "price": 160},
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 2, 10),
+                    "price": 600,
+                },
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 2, 5),
+                    "price": 120,
+                },
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 1),
+                    "price": 160,
+                },
             ],
-            ["duck"]
+            ["duck"],
         )
-    ]
+    ],
 )
-
-
 @mock.patch("app.main.datetime.date.today")
 def test_outdated_products(
-        mock_today: Any, products: list[dict], expected: list[str]
+    mock_today: Any,
+    products: list[dict],
+    expected: list[str],
 ) -> None:
     mock_today.return_value = datetime.date(2022, 2, 2)
     assert outdated_products(products) == expected
