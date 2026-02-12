@@ -23,7 +23,7 @@ from app.main import outdated_products
                 },
                 {
                     "name": "duck",
-                    "expiration_date": datetime.date(2026, 2, 1),
+                    "expiration_date": datetime.date(2026, 2, 11),
                     "price": 160,
                 },
             ],
