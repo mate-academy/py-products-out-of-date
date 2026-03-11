@@ -39,12 +39,12 @@ from app.main import outdated_products
         )
     ]
 )
-@mock.patch("app.main.datetime.date")
+@mock.patch("app.main.datetime")
 def test_modify_expiration_date(
-        mocked_date: type,
+        mocked_datetime: type,
         products: list[dict],
         expected: str
 ) -> None:
 
-    mocked_date.today.return_value = datetime.date(2026, 3, 11)
+    mocked_datetime.date.today.return_value = datetime.date(2026, 3, 11)
     assert outdated_products(products) == [expected]
