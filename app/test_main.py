@@ -34,7 +34,7 @@ from app.main import outdated_products
                     "expiration_date": datetime.date(2026, 3, 10),
                 }
             ],
-            "salmon",
+            ["salmon"],
             id="should add to list if data is less than today",
         )
     ]
@@ -47,4 +47,4 @@ def test_modify_expiration_date(
 ) -> None:
 
     mocked_datetime.date.today.return_value = datetime.date(2026, 3, 11)
-    assert outdated_products(products) == [expected]
+    assert outdated_products(products) == expected
