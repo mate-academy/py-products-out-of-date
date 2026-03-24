@@ -1,30 +1,32 @@
-from app.main import outdated_products
 import datetime
 from unittest.mock import patch, Mock
+
 import pytest
+
+from app.main import outdated_products
 
 
 @pytest.mark.parametrize(
     "product_list, today_date, expected",
     [
         (
-            [
-                {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2022, 2, 10),
-                    "price": 600},
-                {
-                    "name": "chicken",
-                    "expiration_date": datetime.date(2022, 2, 5),
-                    "price": 120},
-                {
-                    "name": "duck",
-                    "expiration_date": datetime.date(2022, 2, 1),
-                    "price": 160
-                },
-            ],
-            datetime.date(2022, 2, 2),
-            ["duck"],
+                [
+                    {
+                        "name": "salmon",
+                        "expiration_date": datetime.date(2022, 2, 10),
+                        "price": 600},
+                    {
+                        "name": "chicken",
+                        "expiration_date": datetime.date(2022, 2, 5),
+                        "price": 120},
+                    {
+                        "name": "duck",
+                        "expiration_date": datetime.date(2022, 2, 1),
+                        "price": 160
+                    },
+                ],
+                datetime.date(2022, 2, 2),
+                ["duck"],
 
         ),
     ]
@@ -42,23 +44,23 @@ def test_outdated_products(mocked_date: Mock,
     "product_list, today_date, expected",
     [
         (
-            [
-                {
-                    "name": "salmon",
-                    "expiration_date": datetime.date(2022, 2, 10),
-                    "price": 600},
-                {
-                    "name": "chicken",
-                    "expiration_date": datetime.date(2022, 2, 5),
-                    "price": 120},
-                {
-                    "name": "duck",
-                    "expiration_date": datetime.date(2022, 2, 1),
-                    "price": 160
-                },
-            ],
-            datetime.date(2022, 2, 10),
-            ["chicken", "duck"],
+                [
+                    {
+                        "name": "salmon",
+                        "expiration_date": datetime.date(2022, 2, 10),
+                        "price": 600},
+                    {
+                        "name": "chicken",
+                        "expiration_date": datetime.date(2022, 2, 5),
+                        "price": 120},
+                    {
+                        "name": "duck",
+                        "expiration_date": datetime.date(2022, 2, 1),
+                        "price": 160
+                    },
+                ],
+                datetime.date(2022, 2, 10),
+                ["chicken", "duck"],
 
         ),
     ]
