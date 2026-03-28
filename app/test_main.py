@@ -1,6 +1,6 @@
 import datetime
-from unittest.mock import patch
 from app.main import outdated_products
+from unittest.mock import patch
 
 
 def test_product_expires_today() -> None:
