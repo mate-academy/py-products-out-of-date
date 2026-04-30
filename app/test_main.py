@@ -12,7 +12,7 @@ def test_outdated_products() -> None:
         {"name": "Cheese", "expiration_date": datetime(2022, 12, 31).date()},
     ]
 
-    with mock.patch('app.main.datetime') as mock_datetime:
+    with mock.patch("app.main.datetime") as mock_datetime:
         mock_datetime.date.today.return_value = datetime(2023, 1, 1).date()
         result = outdated_products(products)
 
