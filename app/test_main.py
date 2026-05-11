@@ -7,6 +7,7 @@ import pytest
 
 from app.main import outdated_products
 
+
 @pytest.fixture()
 def products() -> list[dict]:
     return [
@@ -27,6 +28,7 @@ def products() -> list[dict]:
         }
     ]
 
+
 @pytest.mark.parametrize(
     "expected, date_time",
     [
@@ -35,7 +37,11 @@ def products() -> list[dict]:
         (["salmon", "chicken", "duck"], datetime.date(2022, 2, 11)),
     ]
 )
-def test_outdated_products(date_time: datetime, products: list[dict], expected: list[str]) -> None:
+def test_outdated_products(
+        date_time: datetime,
+        products: list[dict],
+        expected: list[str]
+) -> None:
     with mock.patch("app.main.datetime.date") as mock_date:
         mock_date.today.return_value = date_time
         assert outdated_products(products) == expected
