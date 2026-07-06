@@ -10,7 +10,7 @@ from app.main import outdated_products
     "products_list, expected_list",
     [
         (
-                [
+            [
                 {
                     "name": "salmon",
                     "expiration_date": datetime.date(2025, 2, 10),
@@ -26,10 +26,10 @@ from app.main import outdated_products
                     "expiration_date": datetime.date(2025, 7, 11),
                     "price": 160
                 }
-                ], ["salmon", "chicken"]
+            ], ["salmon", "chicken"]
         ),
         (
-                [
+            [
                 {
                     "name": "crab",
                     "expiration_date": datetime.date(2025, 10, 20),
@@ -45,7 +45,7 @@ from app.main import outdated_products
                     "expiration_date": datetime.date(2025, 5, 7),
                     "price": 320
                 }
-                ], ["cow"]
+            ], ["cow"]
         )
     ]
 )
