@@ -1,11 +1,11 @@
 from datetime import date
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from app.main import outdated_products
 
 
 @patch("app.main.datetime")
-def test_outdated_products_some_expired(mock_datetime) -> None:
+def test_outdated_products_some_expired(mock_datetime: MagicMock) -> None:
     mock_datetime.date.today.return_value = date(2022, 2, 2)
     products = [
         {
@@ -29,7 +29,7 @@ def test_outdated_products_some_expired(mock_datetime) -> None:
 
 
 @patch("app.main.datetime")
-def test_outdated_products_none_expired(mock_datetime) -> None:
+def test_outdated_products_none_expired(mock_datetime: MagicMock) -> None:
     mock_datetime.date.today.return_value = date(2022, 1, 1)
     products = [
         {
@@ -48,7 +48,7 @@ def test_outdated_products_none_expired(mock_datetime) -> None:
 
 
 @patch("app.main.datetime")
-def test_outdated_products_all_expired(mock_datetime) -> None:
+def test_outdated_products_all_expired(mock_datetime: MagicMock) -> None:
     mock_datetime.date.today.return_value = date(2022, 3, 1)
     products = [
         {
@@ -68,7 +68,7 @@ def test_outdated_products_all_expired(mock_datetime) -> None:
 
 @patch("app.main.datetime")
 def test_outdated_products_boundary_today_not_expired(
-    mock_datetime,
+    mock_datetime: MagicMock,
 ) -> None:
     # Продукт з датою == сьогодні НЕ вважається простроченим
     mock_datetime.date.today.return_value = date(2022, 2, 10)
@@ -84,7 +84,7 @@ def test_outdated_products_boundary_today_not_expired(
 
 
 @patch("app.main.datetime")
-def test_outdated_products_empty_list(mock_datetime) -> None:
+def test_outdated_products_empty_list(mock_datetime: MagicMock) -> None:
     mock_datetime.date.today.return_value = date(2022, 2, 2)
 
     assert outdated_products([]) == []
