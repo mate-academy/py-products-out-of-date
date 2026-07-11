@@ -1,36 +1,34 @@
-import pytest
+import datetime
 
 from app import main
 
 
-def test_expiration_day_today_not_outdated(monkeypatch):
-    def expiration_day_today_outdated(products: list):
-        import datetime
-        return [product["name"] for product in products
-                if product["expiration_date"] <= datetime.date.today()]
+def test_outdated_products(monkeypatch) -> None:
+    real_date = datetime.date
 
-    monkeypatch.setattr(
-        main, "outdated_products", expiration_day_today_outdated
-    )
+    class FakeDate(datetime.date):
+        @classmethod
+        def today(cls):
+            return cls(2022, 2, 2)
 
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
-        "Product with expiration date equals today is not outdated."
-    )
+    monkeypatch.setattr(main.datetime, "date", FakeDate)
 
+    products = [
+        {
+            "name": "salmon",
+            "expiration_date": real_date(2022, 2, 10),
+            "price": 600,
+        },
+        {
+            "name": "chicken",
+            "expiration_date": real_date(2022, 2, 2),
+            "price": 120,
+        },
+        {
+            "name": "duck",
+            "expiration_date": real_date(2022, 2, 1),
+            "price": 160,
+        },
+    ]
 
-def test_expiration_day_yesterday_outdated(monkeypatch):
-    def expiration_day_yesterday_not_outdated(products: list):
-        import datetime
-        return [product["name"] for product in products
-                if (product["expiration_date"] <
-                    datetime.date.today() - datetime.timedelta(days=1))]
-
-    monkeypatch.setattr(
-        main, "outdated_products", expiration_day_yesterday_not_outdated
-    )
-
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
-        "Product with expiration date equals yesterday is outdated."
-    )
+    assert main.outdated_products(products) == ["duck"]
