@@ -1,15 +1,17 @@
 import datetime
 
-from pytest_mock import MockerFixture
 from app import main
 
 
-def test_outdated_products(mocker: MockerFixture) -> None:
+def test_outdated_products(monkeypatch: None) -> None:
     real_date = datetime.date
 
-    mocked_date = mocker.patch("app.main.datetime.date")
-    mocked_date.today.return_value = real_date(2022, 2, 2)
-    mocked_date.side_effect = real_date
+    class FakeDate(datetime.date):
+        @classmethod
+        def today(cls) -> real_date:
+            return cls(2022, 2, 2)
+
+    monkeypatch.setattr(main.datetime, "date", FakeDate)
 
     products = [
         {
