@@ -1,11 +1,11 @@
 import datetime
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from app.main import outdated_products
 
 
 @patch("datetime.date.today")
-def test_outdated_products_one_expired(mock_today) -> None:
+def test_outdated_products_one_expired(mock_today: MagicMock) -> None:
     mock_today.return_value = datetime.date(2022, 2, 15)
 
     products = [
@@ -26,7 +26,7 @@ def test_outdated_products_one_expired(mock_today) -> None:
 
 
 @patch("datetime.date.today")
-def test_outdated_products_all_valid(mock_today) -> None:
+def test_outdated_products_all_valid(mock_today: MagicMock) -> None:
     mock_today.return_value = datetime.date(2022, 1, 1)
 
     products = [
@@ -42,7 +42,7 @@ def test_outdated_products_all_valid(mock_today) -> None:
 
 
 @patch("datetime.date.today")
-def test_outdated_products_empty_list(mock_today) -> None:
+def test_outdated_products_empty_list(mock_today: MagicMock) -> None:
     mock_today.return_value = datetime.date(2022, 2, 15)
 
     result = outdated_products([])
