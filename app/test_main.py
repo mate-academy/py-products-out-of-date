@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 from app.main import outdated_products
 
 
-@patch("datetime.date.today")
+@patch("app.main.date.today")
 def test_outdated_products_one_expired(mock_today: MagicMock) -> None:
     mock_today.return_value = datetime.date(2022, 2, 15)
 
@@ -25,7 +25,7 @@ def test_outdated_products_one_expired(mock_today: MagicMock) -> None:
     assert result == ["salmon", "chicken"]
 
 
-@patch("datetime.date.today")
+@patch("app.main.date.today")
 def test_outdated_products_all_valid(mock_today: MagicMock) -> None:
     mock_today.return_value = datetime.date(2022, 1, 1)
 
@@ -41,7 +41,7 @@ def test_outdated_products_all_valid(mock_today: MagicMock) -> None:
     assert result == []
 
 
-@patch("datetime.date.today")
+@patch("app.main.date.today")
 def test_outdated_products_empty_list(mock_today: MagicMock) -> None:
     mock_today.return_value = datetime.date(2022, 2, 15)
 
