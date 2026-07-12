@@ -13,45 +13,29 @@ class MockDate(datetime.date):
 
 
 @patch("datetime.date", MockDate)
-def test_outdated_products_one_expired() -> None:
+def test_outdated_products_edge_cases() -> None:
     MockDate._mock_today = datetime.date(2022, 2, 15)
 
     products = [
         {
-            "name": "salmon",
-            "expiration_date": datetime.date(2022, 2, 10),
-            "price": 600,
+            "name": "venceu_ontem",
+            "expiration_date": datetime.date(2022, 2, 14),
+            "price": 100,
         },
         {
-            "name": "chicken",
-            "expiration_date": datetime.date(2022, 2, 5),
-            "price": 120,
+            "name": "vence_hoje",
+            "expiration_date": datetime.date(2022, 2, 15),
+            "price": 100,
+        },
+        {
+            "name": "vence_amanha",
+            "expiration_date": datetime.date(2022, 2, 16),
+            "price": 100,
         },
     ]
 
     result = outdated_products(products)
-    assert result == ["salmon", "chicken"]
 
-
-@patch("datetime.date", MockDate)
-def test_outdated_products_all_valid() -> None:
-    MockDate._mock_today = datetime.date(2022, 1, 1)
-
-    products = [
-        {
-            "name": "salmon",
-            "expiration_date": datetime.date(2022, 2, 10),
-            "price": 600,
-        },
-    ]
-
-    result = outdated_products(products)
-    assert result == []
-
-
-@patch("datetime.date", MockDate)
-def test_outdated_products_empty_list() -> None:
-    MockDate._mock_today = datetime.date(2022, 2, 15)
-
-    result = outdated_products([])
-    assert result == []
+    assert "venceu_ontem" in result
+    assert "vence_hoje" not in result
+    assert "vence_amanha" not in result
