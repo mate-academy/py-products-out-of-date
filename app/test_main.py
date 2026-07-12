@@ -1,12 +1,20 @@
 import datetime
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from app.main import outdated_products
 
 
-@patch("app.main.date.today")
-def test_outdated_products_one_expired(mock_today: MagicMock) -> None:
-    mock_today.return_value = datetime.date(2022, 2, 15)
+class MockDate(datetime.date):
+    _mock_today: datetime.date
+
+    @classmethod
+    def today(cls) -> datetime.date:
+        return cls._mock_today
+
+
+@patch("datetime.date", MockDate)
+def test_outdated_products_one_expired() -> None:
+    MockDate._mock_today = datetime.date(2022, 2, 15)
 
     products = [
         {
@@ -25,9 +33,9 @@ def test_outdated_products_one_expired(mock_today: MagicMock) -> None:
     assert result == ["salmon", "chicken"]
 
 
-@patch("app.main.date.today")
-def test_outdated_products_all_valid(mock_today: MagicMock) -> None:
-    mock_today.return_value = datetime.date(2022, 1, 1)
+@patch("datetime.date", MockDate)
+def test_outdated_products_all_valid() -> None:
+    MockDate._mock_today = datetime.date(2022, 1, 1)
 
     products = [
         {
@@ -41,9 +49,9 @@ def test_outdated_products_all_valid(mock_today: MagicMock) -> None:
     assert result == []
 
 
-@patch("app.main.date.today")
-def test_outdated_products_empty_list(mock_today: MagicMock) -> None:
-    mock_today.return_value = datetime.date(2022, 2, 15)
+@patch("datetime.date", MockDate)
+def test_outdated_products_empty_list() -> None:
+    MockDate._mock_today = datetime.date(2022, 2, 15)
 
     result = outdated_products([])
     assert result == []
