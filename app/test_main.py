@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 
 
 from app.main import outdated_products
@@ -7,9 +7,9 @@ from app.main import outdated_products
 def test_if_the_product_is_expired() -> None:
     products = [
         {
-        "name": "salmon",
-        "expiration_date": datetime.date.today() - datetime.timedelta(days=1),
-        "price": 600
+            "name": "salmon",
+            "expiration_date": datetime.date.today() - timedelta(days=1),
+            "price": 600
         }
     ]
     assert outdated_products(products) == ["salmon"]
