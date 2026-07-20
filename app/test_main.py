@@ -4,6 +4,12 @@ from unittest.mock import patch
 from app.main import outdated_products
 
 
+class FakeDate(datetime.date):
+    @classmethod
+    def today(cls) -> datetime.date:
+        return cls(2022, 2, 2)
+
+
 def test_outdated_products() -> None:
     products = [
         {
@@ -37,25 +43,14 @@ def test_outdated_products() -> None:
 
     with patch(
         "app.main.datetime.date",
-    ) as mock_date:
-        mock_date.today.return_value = (
-            datetime.date(
-                2022,
-                2,
-                2,
-            )
-        )
-        mock_date.side_effect = (
-            lambda *args, **kwargs:
-            datetime.date(*args, **kwargs)
-        )
-
+        FakeDate,
+    ):
         assert outdated_products(products) == [
             "duck",
         ]
 
 
-def test_product_expired_today() -> None:
+def test_product_expires_today() -> None:
     products = [
         {
             "name": "milk",
@@ -70,19 +65,8 @@ def test_product_expired_today() -> None:
 
     with patch(
         "app.main.datetime.date",
-    ) as mock_date:
-        mock_date.today.return_value = (
-            datetime.date(
-                2022,
-                2,
-                2,
-            )
-        )
-        mock_date.side_effect = (
-            lambda *args, **kwargs:
-            datetime.date(*args, **kwargs)
-        )
-
+        FakeDate,
+    ):
         assert outdated_products(products) == []
 
 
@@ -101,17 +85,6 @@ def test_no_outdated_products() -> None:
 
     with patch(
         "app.main.datetime.date",
-    ) as mock_date:
-        mock_date.today.return_value = (
-            datetime.date(
-                2022,
-                2,
-                2,
-            )
-        )
-        mock_date.side_effect = (
-            lambda *args, **kwargs:
-            datetime.date(*args, **kwargs)
-        )
-
+        FakeDate,
+    ):
         assert outdated_products(products) == []
