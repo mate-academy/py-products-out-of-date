@@ -38,10 +38,16 @@ def test_outdated_products() -> None:
     with patch(
         "app.main.datetime.date",
     ) as mock_date:
-        mock_date.today.return_value = datetime.date(
-            2022,
-            2,
-            2,
+        mock_date.today.return_value = (
+            datetime.date(
+                2022,
+                2,
+                2,
+            )
+        )
+        mock_date.side_effect = (
+            lambda *args, **kwargs:
+            datetime.date(*args, **kwargs)
         )
 
         assert outdated_products(products) == [
@@ -65,10 +71,16 @@ def test_product_expired_today() -> None:
     with patch(
         "app.main.datetime.date",
     ) as mock_date:
-        mock_date.today.return_value = datetime.date(
-            2022,
-            2,
-            2,
+        mock_date.today.return_value = (
+            datetime.date(
+                2022,
+                2,
+                2,
+            )
+        )
+        mock_date.side_effect = (
+            lambda *args, **kwargs:
+            datetime.date(*args, **kwargs)
         )
 
         assert outdated_products(products) == []
@@ -90,10 +102,16 @@ def test_no_outdated_products() -> None:
     with patch(
         "app.main.datetime.date",
     ) as mock_date:
-        mock_date.today.return_value = datetime.date(
-            2022,
-            2,
-            2,
+        mock_date.today.return_value = (
+            datetime.date(
+                2022,
+                2,
+                2,
+            )
+        )
+        mock_date.side_effect = (
+            lambda *args, **kwargs:
+            datetime.date(*args, **kwargs)
         )
 
         assert outdated_products(products) == []
