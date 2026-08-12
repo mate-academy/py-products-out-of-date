@@ -1,1 +1,72 @@
-# write your code here
+from app.main import outdated_products
+import datetime
+from unittest.mock import patch, Mock
+import pytest
+
+
+@pytest.mark.parametrize(
+    "product_list, today_date, expected",
+    [
+        (
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 2, 10),
+                    "price": 600},
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 2, 5),
+                    "price": 120},
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 1),
+                    "price": 160
+                },
+            ],
+            datetime.date(2022, 2, 2),
+            ["duck"],
+
+        ),
+    ]
+)
+@patch("app.main.datetime.date")
+def test_outdated_products(mocked_date: Mock,
+                           product_list: dict,
+                           today_date: datetime,
+                           expected: list[str]) -> None:
+    mocked_date.today.return_value = today_date
+    assert outdated_products(product_list) == expected
+
+
+@pytest.mark.parametrize(
+    "product_list, today_date, expected",
+    [
+        (
+            [
+                {
+                    "name": "salmon",
+                    "expiration_date": datetime.date(2022, 2, 10),
+                    "price": 600},
+                {
+                    "name": "chicken",
+                    "expiration_date": datetime.date(2022, 2, 5),
+                    "price": 120},
+                {
+                    "name": "duck",
+                    "expiration_date": datetime.date(2022, 2, 1),
+                    "price": 160
+                },
+            ],
+            datetime.date(2022, 2, 10),
+            ["chicken", "duck"],
+
+        ),
+    ]
+)
+@patch("app.main.datetime.date")
+def test_outdated_products_equal_date(mocked_date: Mock,
+                                      product_list: dict,
+                                      today_date: datetime,
+                                      expected: list[str]) -> None:
+    mocked_date.today.return_value = today_date
+    assert outdated_products(product_list) == expected
