@@ -7,7 +7,7 @@ def test_expiration_day_today_not_outdated(monkeypatch):
     def expiration_day_today_outdated(products: list):
         import datetime
         return [product["name"] for product in products
-                if product["expiration_date"] <= datetime.date.today()]
+                if product["expiration_date"] == datetime.date.today()]
 
     monkeypatch.setattr(
         main, "outdated_products", expiration_day_today_outdated
