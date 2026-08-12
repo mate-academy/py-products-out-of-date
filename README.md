@@ -12,7 +12,7 @@ For example: `datetime.date.today()` for
 ```python
 print(outdated_products([
     {
-        "name": "salmon",
+        "name": "salmon",""
         "expiration_date": datetime.date(2022, 2, 10),
         "price": 600
     },
