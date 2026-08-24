@@ -51,7 +51,7 @@ from app import main
             id="test: today is not outdated"
         ),
     ],
-) # Help me
+)  # Help me
 def test_date_yesterday(
         products: list[dict],
         correct_output: list,
