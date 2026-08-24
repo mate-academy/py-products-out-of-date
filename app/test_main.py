@@ -52,7 +52,11 @@ from app import main
         ),
     ],
 )
-def test_date_yesterday(products: list[dict], correct_output: list, monkeypatch: callable) -> None:
+def test_date_yesterday(
+        products: list[dict],
+        correct_output: list,
+        monkeypatch: callable
+) -> None:
     mock_date = Mock()
     mock_date.date.today.return_value = datetime.date(2022, 2, 2)
     monkeypatch.setattr(main, "datetime", mock_date)
