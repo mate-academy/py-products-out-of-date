@@ -1,8 +1,6 @@
 import pytest
 import datetime
 
-from _pytest import monkeypatch
-
 from app.main import outdated_products
 
 
@@ -93,7 +91,7 @@ def test_outdated_products(
 
     class FakeToday:
         @classmethod
-        def today(cls) -> datetime:
+        def today(cls) -> datetime.date:
             return new_date(year, month, day)
 
     monkeypatch.setattr(datetime, "date", FakeToday)
