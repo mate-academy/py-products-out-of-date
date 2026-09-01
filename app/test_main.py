@@ -79,7 +79,7 @@ from app.main import outdated_products
     ]
 )
 def test_outdated_products(
-        monkeypatch: monkeypatch,
+        monkeypatch: pytest.MonkeyPatch,
         products: list,
         year: int,
         month: int,
