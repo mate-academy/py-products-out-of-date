@@ -1,36 +1,22 @@
-import pytest
-
-from app import main
-
-
-def test_expiration_day_today_not_outdated(monkeypatch):
-    def expiration_day_today_outdated(products: list):
-        import datetime
-        return [product["name"] for product in products
-                if product["expiration_date"] <= datetime.date.today()]
-
-    monkeypatch.setattr(
-        main, "outdated_products", expiration_day_today_outdated
-    )
-
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
-        "Product with expiration date equals today is not outdated."
-    )
+from datetime import date
+from unittest.mock import patch
+from app.main import outdated_products
 
 
-def test_expiration_day_yesterday_outdated(monkeypatch):
-    def expiration_day_yesterday_not_outdated(products: list):
-        import datetime
-        return [product["name"] for product in products
-                if (product["expiration_date"] <
-                    datetime.date.today() - datetime.timedelta(days=1))]
+def test_expiration_day_today_not_outdated() -> None:
+    with patch("datetime.date") as mock_date:
+        mock_date.today.return_value = date(2022, 2, 2)
+        products = [
+            {"name": "salmon", "expiration_date":
+             date(2022, 2, 2), "price": 600}
+        ]
+        assert outdated_products(products) == []
 
-    monkeypatch.setattr(
-        main, "outdated_products", expiration_day_yesterday_not_outdated
-    )
 
-    test_result = pytest.main(["app/test_main.py"])
-    assert test_result.value == 1, (
-        "Product with expiration date equals yesterday is outdated."
-    )
+def test_expiration_day_yesterday_outdated() -> None:
+    with patch("datetime.date") as mock_date:
+        mock_date.today.return_value = date(2022, 2, 2)
+        products = [
+            {"name": "duck", "expiration_date": date(2022, 2, 1), "price": 160}
+        ]
+        assert outdated_products(products) == ["duck"]
